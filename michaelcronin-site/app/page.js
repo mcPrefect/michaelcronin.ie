@@ -21,6 +21,17 @@ export default function Home() {
   const baseTabStyle = "px-4 py-2 border-b-2 font-medium text-gray-500 hover:text-blue-600 hover:border-blue-600 dark:text-gray-400 dark:hover:text-blue-400";
   const activeTabStyle = "px-4 py-2 border-b-2 font-medium text-blue-600 border-blue-600 dark:text-blue-400";
 
+  const logos = [
+    "python.png",
+    "qdrant.png",
+    "docker.png",
+    "jupyter.png",
+    "Podman.png",
+    "streamlit.png",
+    "langgraph.png",
+    "Java.png",
+  ];
+  
   return (
     <main className="min-h-screen bg-white text-gray-900 dark:bg-zinc-900 dark:text-gray-100 px-6 md:px-20 py-16 transition-colors duration-300">
       {/* Tab Buttons */}
@@ -34,9 +45,15 @@ export default function Home() {
       {tab === "about" && (
         <section className="flex flex-col md:flex-row md:items-start items-center justify-between md:space-x-12 space-y-10 md:space-y-0">
           <div className="md:w-1/2 space-y-6">
-            <p className="font-[--font-handwritten] text-2xl text-orange-500 dark:text-orange-400">
-              make everything<br />look interesting
-            </p>
+          <p className="font-[--font-handwritten] text-2xl text-orange-500 dark:text-orange-400 leading-relaxed max-w-2xl">
+  “Isn&apos;t it enough to see that a garden is beautiful without<br />
+  having to believe that there are fairies at the bottom of it too?”<br />
+  <span className="text-sm text-gray-600 dark:text-gray-400 block mt-2">
+    ― Douglas Adams, <em>The Hitchhiker’s Guide to the Galaxy</em>
+  </span>
+</p>
+
+
             <h1 className="text-5xl font-extrabold leading-tight">
               MICHAEL<br />CRONIN
             </h1>
@@ -155,8 +172,24 @@ export default function Home() {
           </div>
         </section>
       )}
+{/* Skills Strip */}
+<section className="mt-20 overflow-hidden">
+  <div className="whitespace-nowrap animate-scroll flex gap-8 px-4 py-6 items-center">
+    {[...logos, ...logos].map((img, i) => (
+      <img
+        key={i}
+        src={`/skills/${img}`}
+        alt={img.replace(/\.(svg|png)$/, "")}
+        className="h-24 w-auto object-contain inline-block"
+      />
+    ))}
+  </div>
+</section>
 
-      <DarkModeToggle />
+
+
+<DarkModeToggle />
+
     </main>
   );
 }
