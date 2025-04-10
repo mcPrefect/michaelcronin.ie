@@ -33,7 +33,8 @@ export default function Home() {
   ];
   
   return (
-    <main className="min-h-screen bg-white text-gray-900 dark:bg-zinc-900 dark:text-gray-100 px-6 md:px-20 py-16 transition-colors duration-300">
+    <main className="min-h-screen bg-white text-gray-900 dark:bg-zinc-900 dark:text-gray-100 px-6 md:px-20 pt-0 pb-16 transition-colors duration-300">
+
       {/* Tab Buttons */}
       <div className="flex justify-center space-x-6 border-b mb-12">
         <button className={tab === "about" ? activeTabStyle : baseTabStyle} onClick={() => setTab("about")}>About</button>
