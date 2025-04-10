@@ -91,33 +91,90 @@ export default function Home() {
         </>
       )}
 
-      {tab === "projects" && (
-        <>
-          <section className="py-16 text-center">
-            <h2 className="text-3xl font-bold mb-6">Projects</h2>
-            <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto px-4">
-              <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md text-left">
-                <h3 className="text-xl font-semibold mb-2">AI Portfolio Site</h3>
-                <p className="text-sm text-gray-700 dark:text-gray-300">A personal portfolio built with Next.js, Tailwind, and deployed on Vercel. Includes tabs, dark mode, and photography lightbox.</p>
-              </div>
-              <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md text-left">
-                <h3 className="text-xl font-semibold mb-2">Dell AI Intern Tools</h3>
-                <p className="text-sm text-gray-700 dark:text-gray-300">Internal tools I worked on as part of my internship at Dell, streamlining data prep and model deployment for internal workflows.</p>
-              </div>
-              <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md text-left">
-                <h3 className="text-xl font-semibold mb-2">Plastic Type Detection with MML</h3>
-                <p className="text-sm text-gray-700 dark:text-gray-300">Group project for a college module where I developed a multimodal machine learning model using a 2D-CNN on hyperspectral images of various plastic types. The goal was to create an app where users could upload a photo of plastic, receive identification of the plastic type, and get associated cancer risk data based on their age and location.</p>
-              </div>
-              <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md text-left">
-                <h3 className="text-xl font-semibold mb-2">Toonify – Image Cartoonizer App</h3>
-                <p className="text-sm text-gray-700 dark:text-gray-300">I developed a containerized image generation app called Toonify using Fooocus. It transforms user-uploaded photos into cartoon-style versions. The app was deployed with Docker and featured a sleek Streamlit UI for easy interaction.</p>
+{tab === "projects" && (
+  <>
+    <section className="py-16 text-center">
+      <h2 className="text-4xl font-bold mb-12">Projects</h2>
+
+      <div className="flex flex-col space-y-24 max-w-6xl mx-auto px-4">
+        {[
+          {
+            title: "AI Portfolio Site",
+            description:
+              "A personal portfolio built with Next.js, Tailwind, and deployed on Vercel. Includes tabs, dark mode, and photography lightbox.",
+            image: "/projects/portfolio.png",
+            liveLink: "#",
+            codeLink: "#",
+          },
+          {
+            title: "Dell AI Intern Tools",
+            description:
+              "Internal tools I worked on at Dell to streamline data preparation and model deployment workflows.",
+            image: "/projects/dell-tools.png",
+            liveLink: "#",
+            codeLink: "#",
+          },
+          {
+            title: "Plastic Type Detection with MML",
+            description:
+              "Multimodal ML model using 2D-CNNs on hyperspectral plastic images. Users can upload photos to identify plastic types and get associated cancer risks.",
+            image: "/projects/plastic.png",
+            liveLink: "#",
+            codeLink: "#",
+          },
+          {
+            title: "Toonify – Image Cartoonizer App",
+            description:
+              "Fooocus-based app that converts user-uploaded photos to cartoon versions. Built with Streamlit and Docker.",
+            image: "/projects/toonify.png",
+            liveLink: "#",
+            codeLink: "#",
+          },
+        ].map((project, idx) => (
+          <div
+            key={idx}
+            className="flex flex-col md:flex-row items-center gap-10 bg-zinc-100 dark:bg-zinc-800 rounded-2xl shadow-xl p-6"
+          >
+            {/* Text */}
+            <div className="md:w-1/2 text-left space-y-4">
+              <h3 className="text-3xl font-semibold">{project.title}</h3>
+              <p className="text-gray-700 dark:text-gray-300 text-sm">{project.description}</p>
+              <div className="flex gap-4 mt-4">
+                <a
+                  href={project.liveLink}
+                  target="_blank"
+                  className="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition"
+                >
+                  Live App
+                </a>
+                <a
+                  href={project.codeLink}
+                  target="_blank"
+                  className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  Learn More
+                </a>
               </div>
             </div>
-          </section>
 
-          <SkillsStrip />
-        </>
-      )}
+            {/* Image */}
+            <div className="md:w-1/2 flex justify-center">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="rounded-xl max-h-[400px] w-full object-contain bg-black p-4"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <SkillsStrip />
+  </>
+)}
+
+
 
 
       {tab === "photography" && (
