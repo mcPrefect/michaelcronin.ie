@@ -6,11 +6,10 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-900 px-6 md:px-20 py-16">
       <section className="flex flex-col md:flex-row items-center justify-between space-y-10 md:space-y-0">
-
         {/* Left Column */}
         <div className="md:w-1/2 space-y-6">
           <p className="text-orange-500 font-handwritten text-2xl leading-snug">
-            make everything<br />looks interesting
+            make everything<br />look interesting
           </p>
 
           <h1 className="text-5xl font-extrabold leading-tight">
@@ -18,31 +17,32 @@ export default function Home() {
           </h1>
 
           <p className="text-xl text-gray-600 leading-relaxed">
-            DEVELOPER<br />PHOTOGRAPHER<br />STUDENT
+            ARTIFICIAL INTELLIGENCE & MACHINE LEARNING STUDENT<br />
+            DELL TECHNOLOGIES INTERN
           </p>
 
           <div>
             <h2 className="text-lg font-semibold mt-6">ABOUT ME</h2>
             <p className="text-sm leading-relaxed">
-              I’m a student with a passion for coding, building projects, and capturing the world through photography. I enjoy learning new technologies and creating things that make an impact.
+              I'm currently studying Artificial Intelligence & Machine Learning at the University of Limerick. As an intern at Dell Technologies, I'm gaining practical experience in the tech industry. I'm passionate about developing intelligent systems and exploring new technologies.
             </p>
           </div>
 
           <div className="flex space-x-6 mt-4 text-sm text-gray-600">
             <div className="flex items-center space-x-2">
-              <span className="text-xl">📅</span>
-              <span>25 years old</span>
+              <span className="text-xl">📍</span>
+              <span>Cork, Ireland</span>
             </div>
             <div className="flex items-center space-x-2">
-              <span className="text-xl">💻</span>
-              <span>Python</span>
+              <span className="text-xl">🎓</span>
+              <span>University of Limerick</span>
             </div>
           </div>
 
           <div className="mt-6">
             <h2 className="text-lg font-semibold">INTERESTS</h2>
             <p className="text-sm">
-              Software development, working with people, visual storytelling, photography, and digital design.
+              Artificial intelligence, machine learning, data science, and technology innovation.
             </p>
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function Home() {
         {/* Right Column - Image */}
         <div className="md:w-1/2 flex justify-center">
           <Image
-            src="/michael.jpg" // Replace with the correct path
+            src="/michael.jpg" // Ensure this path is correct
             alt="Michael Cronin"
             width={400}
             height={600}
