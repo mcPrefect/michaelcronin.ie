@@ -11,7 +11,7 @@ export default function Home() {
       <section className="py-16 px-4 max-w-4xl mx-auto">
         <h2 className="text-3xl font-semibold mb-4">About Me</h2>
         <p>
-          I'm a student with a passion for coding, building projects, and capturing the world through photography. I enjoy learning new technologies and creating things that make an impact.
+          {"I'm a student with a passion for coding, building projects, and capturing the world through photography. I enjoy learning new technologies and creating things that make an impact."}
         </p>
       </section>
 
