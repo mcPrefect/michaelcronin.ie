@@ -50,7 +50,7 @@ export default function Home() {
         {/* Right Column - Image */}
         <div className="md:w-1/2 flex justify-center">
           <Image
-            src="/your-photo.jpg" // Replace with the correct path
+            src="IMG-20241208-WA0031.jpg" // Replace with the correct path
             alt="Michael Cronin"
             width={400}
             height={600}
