@@ -8,9 +8,10 @@ export default function Home() {
       <section className="flex flex-col md:flex-row items-center justify-between space-y-10 md:space-y-0">
         {/* Left Column */}
         <div className="md:w-1/2 space-y-6">
-          <p className="text-orange-500 font-handwritten text-2xl leading-snug">
-            make everything<br />look interesting
-          </p>
+        <p className="font-[--font-handwritten] text-2xl text-orange-500">
+          make everything<br />look interesting
+        </p>
+
 
           <h1 className="text-5xl font-extrabold leading-tight">
             MICHAEL<br />CRONIN
