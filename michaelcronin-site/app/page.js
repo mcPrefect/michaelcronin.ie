@@ -1,76 +1,62 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
 
 export default function Home() {
-  const [tab, setTab] = useState("projects");
-
-  const baseTabStyle = "px-4 py-2 border-b-2 font-medium text-gray-500 hover:text-blue-600 hover:border-blue-600";
-  const activeTabStyle = "px-4 py-2 border-b-2 font-medium text-blue-600 border-blue-600";
-
   return (
-    <main className="min-h-screen bg-white text-gray-800">
-      {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center text-center py-20 bg-gray-100">
-        <h1 className="text-5xl font-bold mb-4">Michael Cronin</h1>
-        <p className="text-xl text-gray-600">Developer | Photographer | Student</p>
-      </section> 
+    <main className="min-h-screen bg-white text-gray-900 px-6 md:px-20 py-16">
+      <section className="flex flex-col md:flex-row items-center justify-between space-y-10 md:space-y-0">
 
-      {/* About Section */}
-      <section className="py-16 px-4 max-w-4xl mx-auto">
-        <h2 className="text-3xl font-semibold mb-4">About Me</h2>
-        <p>
-          {"I'm a student with a passion for coding, building projects, and capturing the world through photography. I enjoy learning new technologies and creating things that make an impact."}
-        </p>
-      </section>
+        {/* Left Column */}
+        <div className="md:w-1/2 space-y-6">
+          <p className="text-orange-500 font-handwritten text-2xl leading-snug">
+            make everything<br />looks interesting
+          </p>
 
-      {/* Tabbed Content */}
-      <section className="py-8 px-4 max-w-4xl mx-auto">
-        <div className="flex justify-center space-x-4 border-b mb-8">
-          <button className={tab === 'projects' ? activeTabStyle : baseTabStyle} onClick={() => setTab('projects')}>Projects</button>
-          <button className={tab === 'photography' ? activeTabStyle : baseTabStyle} onClick={() => setTab('photography')}>Photography</button>
-          <button className={tab === 'resume' ? activeTabStyle : baseTabStyle} onClick={() => setTab('resume')}>Resume</button>
-        </div>
+          <h1 className="text-5xl font-extrabold leading-tight">
+            MICHAEL<br />CRONIN
+          </h1>
 
-        {tab === 'projects' && (
+          <p className="text-xl text-gray-600 leading-relaxed">
+            DEVELOPER<br />PHOTOGRAPHER<br />STUDENT
+          </p>
+
           <div>
-            <h3 className="text-2xl font-semibold mb-4">My Projects</h3>
-            <ul className="space-y-4">
-              <li className="border p-4 rounded-xl shadow">Project One – brief description here.</li>
-              <li className="border p-4 rounded-xl shadow">Project Two – brief description here.</li>
-            </ul>
+            <h2 className="text-lg font-semibold mt-6">ABOUT ME</h2>
+            <p className="text-sm leading-relaxed">
+              I’m a student with a passion for coding, building projects, and capturing the world through photography. I enjoy learning new technologies and creating things that make an impact.
+            </p>
           </div>
-        )}
 
-        {tab === 'photography' && (
-          <div>
-            <h3 className="text-2xl font-semibold mb-4">My Photography</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <div className="h-40 bg-gray-300 rounded-lg"></div>
-              <div className="h-40 bg-gray-300 rounded-lg"></div>
-              <div className="h-40 bg-gray-300 rounded-lg"></div>
+          <div className="flex space-x-6 mt-4 text-sm text-gray-600">
+            <div className="flex items-center space-x-2">
+              <span className="text-xl">📅</span>
+              <span>25 years old</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-xl">💻</span>
+              <span>Python</span>
             </div>
           </div>
-        )}
 
-        {tab === 'resume' && (
-          <div>
-            <h3 className="text-2xl font-semibold mb-4">My Resume</h3>
-            <p>You can download my resume <a href="#" className="text-blue-600 underline">here</a>.</p>
-            <ul className="mt-4 space-y-2 text-sm text-gray-700">
-              <li><strong>Education:</strong> BSc in Computer Science, University of [Your School]</li>
-              <li><strong>Internships:</strong> Frontend intern at XYZ Company – built features in React</li>
-              <li><strong>Skills:</strong> JavaScript, React, Tailwind CSS, Python, Git</li>
-            </ul>
+          <div className="mt-6">
+            <h2 className="text-lg font-semibold">INTERESTS</h2>
+            <p className="text-sm">
+              Software development, working with people, visual storytelling, photography, and digital design.
+            </p>
           </div>
-        )}
-      </section>
+        </div>
 
-      {/* Contact */}
-      <section className="py-16 px-4 max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl font-semibold mb-4">Contact</h2>
-        <p className="mb-4">Feel free to reach out via email or follow me on my socials.</p>
-        <p>Email: <a href="mailto:michael@example.com" className="text-blue-600 hover:underline">michael@example.com</a></p>
+        {/* Right Column - Image */}
+        <div className="md:w-1/2 flex justify-center">
+          <Image
+            src="/your-photo.jpg" // Replace with the correct path
+            alt="Michael Cronin"
+            width={400}
+            height={600}
+            className="rounded-xl shadow-xl object-cover"
+          />
+        </div>
       </section>
     </main>
   );
