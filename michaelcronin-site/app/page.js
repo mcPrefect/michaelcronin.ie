@@ -28,6 +28,7 @@ export default function Home() {
       {/* Tab Buttons */}
       <div className="flex justify-center space-x-6 border-b mb-12">
         <button className={tab === "about" ? activeTabStyle : baseTabStyle} onClick={() => setTab("about")}>About</button>
+        <button className={tab === "projects" ? activeTabStyle : baseTabStyle} onClick={() => setTab("projects")}>Projects</button>
         <button className={tab === "photography" ? activeTabStyle : baseTabStyle} onClick={() => setTab("photography")}>Photography</button>
         <button className={tab === "contact" ? activeTabStyle : baseTabStyle} onClick={() => setTab("contact")}>Contact</button>
       </div>
@@ -80,31 +81,45 @@ export default function Home() {
         </section>
       )}
 
+      {tab === "projects" && (
+        <section className="py-16 text-center">
+          {/* <h2 className="text-3xl font-bold mb-6">Projects</h2> */}
+          <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto px-4">
+            <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md text-left">
+              <h3 className="text-xl font-semibold mb-2">AI Portfolio Site</h3>
+              <p className="text-sm text-gray-700 dark:text-gray-300">A personal portfolio built with Next.js, Tailwind, and deployed on Vercel. Includes tabs, dark mode, and photography lightbox.</p>
+            </div>
+            <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md text-left">
+              <h3 className="text-xl font-semibold mb-2">Dell AI Intern Tools</h3>
+              <p className="text-sm text-gray-700 dark:text-gray-300">Internal tools I worked on as part of my internship at Dell, streamlining data prep and model deployment for internal workflows.</p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {tab === "photography" && (
         <section className="py-16 text-center">
-          
-
+          {/* <h2 className="text-3xl font-bold mb-4">Photography</h2> */}
+          {/* <p className="text-gray-600 dark:text-gray-300 mb-8">
+            A few moments I’ve captured recently — more on <a href="https://glass.photo/michaelcronin" className="underline text-blue-600 dark:text-blue-400" target="_blank">Glass</a>.
+          </p> */}
           <div className="overflow-x-auto scrollbar-hide">
-  <div className="flex gap-6 px-4">
-    {images.map((src, i) => (
-      <div
-  key={i}
-  onClick={() => setOpen(i)}
-  className="flex-none overflow-hidden rounded-xl shadow-lg"
->
-
-        <img
-          src={src}
-          alt={`Photo ${i + 1}`}
-          className="h-[80vh] w-auto rounded-xl object-contain shadow-lg cursor-pointer transition-transform hover:scale-105"
-        />
-      </div>
-    ))}
-  </div>
-</div>
-
-
-
+            <div className="flex gap-6 px-4">
+              {images.map((src, i) => (
+                <div
+                  key={i}
+                  onClick={() => setOpen(i)}
+                  className="flex-none overflow-hidden rounded-xl shadow-lg cursor-pointer"
+                >
+                  <img
+                    src={src}
+                    alt={`Photo ${i + 1}`}
+                    className="h-[80vh] w-auto object-contain transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
           <Lightbox
             open={open >= 0}
             close={() => setOpen(-1)}
@@ -115,26 +130,25 @@ export default function Home() {
         </section>
       )}
 
-{tab === "contact" && (
-  <section className="py-12 text-center">
-    <h2 className="text-2xl font-semibold mb-4">Connect with me</h2>
-    <p className="text-gray-600 dark:text-gray-300 mb-6 text-lg">
-      Reach out any time at <a href="michael04cronin@gmail.com" className="underline text-blue-600 dark:text-blue-400">michael@example.com</a>
-    </p>
-    <div className="flex justify-center space-x-6 text-2xl mt-4">
-      <a href="https://github.com/mcPrefect" target="_blank" className="text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition">
-        <FaGithub />
-      </a>
-      <a href="https://www.linkedin.com/in/michael-cronin-5269a51b2" target="_blank" className="text-gray-600 hover:text-blue-700 dark:text-gray-300 dark:hover:text-white transition">
-        <FaLinkedin />
-      </a>
-      <a href="https://glass.photo/michaelcronin" target="_blank" className="text-gray-600 hover:text-pink-600 dark:text-gray-300 dark:hover:text-white transition">
-        <FaCameraRetro />
-      </a>
-    </div>
-  </section>
-)}
-
+      {tab === "contact" && (
+        <section className="py-12 text-center">
+          <h2 className="text-2xl font-semibold mb-4">Connect with me</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-6 text-lg">
+            Reach out any time at <a href="mailto:michael04cronin@gmail.com" className="underline text-blue-600 dark:text-blue-400">michael04cronin@gmail.com</a>
+          </p>
+          <div className="flex justify-center space-x-6 text-2xl mt-4">
+            <a href="https://github.com/mcPrefect" target="_blank" className="text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition">
+              <FaGithub />
+            </a>
+            <a href="https://www.linkedin.com/in/michael-cronin-5269a51b2" target="_blank" className="text-gray-600 hover:text-blue-700 dark:text-gray-300 dark:hover:text-white transition">
+              <FaLinkedin />
+            </a>
+            <a href="https://glass.photo/michaelcronin" target="_blank" className="text-gray-600 hover:text-pink-600 dark:text-gray-300 dark:hover:text-white transition">
+              <FaCameraRetro />
+            </a>
+          </div>
+        </section>
+      )}
 
       <DarkModeToggle />
     </main>
