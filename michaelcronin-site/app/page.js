@@ -16,8 +16,6 @@ export default function Home() {
     "/photos/photo-2.jpg",
     "/photos/photo-3.jpg",
     "/photos/photo-4.jpg",
-    "/photos/photo-5.jpg",
-    "/photos/photo-6.jpg",
   ];
 
   const baseTabStyle = "px-4 py-2 border-b-2 font-medium text-gray-500 hover:text-blue-600 hover:border-blue-600 dark:text-gray-400 dark:hover:text-blue-400";
@@ -81,9 +79,9 @@ export default function Home() {
         </section>
       )}
 
-      {tab === "projects" && (
+{tab === "projects" && (
         <section className="py-16 text-center">
-          {/* <h2 className="text-3xl font-bold mb-6">Projects</h2> */}
+          <h2 className="text-3xl font-bold mb-6">Projects</h2>
           <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto px-4">
             <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md text-left">
               <h3 className="text-xl font-semibold mb-2">AI Portfolio Site</h3>
@@ -92,6 +90,14 @@ export default function Home() {
             <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md text-left">
               <h3 className="text-xl font-semibold mb-2">Dell AI Intern Tools</h3>
               <p className="text-sm text-gray-700 dark:text-gray-300">Internal tools I worked on as part of my internship at Dell, streamlining data prep and model deployment for internal workflows.</p>
+            </div>
+            <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md text-left">
+              <h3 className="text-xl font-semibold mb-2">Plastic Type Detection with MML</h3>
+              <p className="text-sm text-gray-700 dark:text-gray-300">Group project for a college module where I developed a multimodal machine learning model using a 2D-CNN on hyperspectral images of various plastic types. The goal was to create an app where users could upload a photo of plastic, receive identification of the plastic type, and get associated cancer risk data based on their age and location.</p>
+            </div>
+            <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md text-left">
+              <h3 className="text-xl font-semibold mb-2">Toonify – Image Cartoonizer App</h3>
+              <p className="text-sm text-gray-700 dark:text-gray-300">I developed a containerized image generation app called Toonify using Fooocus. It transforms user-uploaded photos into cartoon-style versions. The app was deployed with Docker and featured a sleek Streamlit UI for easy interaction.</p>
             </div>
           </div>
         </section>
