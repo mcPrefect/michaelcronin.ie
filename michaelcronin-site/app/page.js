@@ -35,7 +35,7 @@ if (underConstruction) {
         <div>
           <h1 className="text-4xl font-bold mb-4 text-yellow-800">🚧 Under Construction</h1>
           <p className="text-lg text-yellow-700 max-w-xl mx-auto">
-            Hi Yasmin, I love you
+            Hi Yasmin, I love you - Michael
             
           </p>
         </div>
