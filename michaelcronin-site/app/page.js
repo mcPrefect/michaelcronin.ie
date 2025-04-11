@@ -9,6 +9,7 @@ import "yet-another-react-lightbox/styles.css";
 import { logos } from "../data/skills";
 import SkillsStrip from "../components/SkillsStrip";
 import Tabs from "../components/Tabs";
+import { Analytics } from "@vercel/analytics/react"
 
 
 export default function Home() {
