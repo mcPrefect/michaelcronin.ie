@@ -35,7 +35,7 @@ if (underConstruction) {
         <div>
           <h1 className="text-4xl font-bold mb-4 text-yellow-800">🚧 Under Construction</h1>
           <p className="text-lg text-yellow-700 max-w-xl mx-auto">
-            This portfolio is currently being built! Check back soon for updates, projects, and polished content. Hi Yasmin 
+            Hi Yasmin, I love you
             
           </p>
         </div>
