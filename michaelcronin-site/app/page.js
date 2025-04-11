@@ -68,8 +68,8 @@ export default function Home() {
               <h2 className="text-xl font-semibold text-wesTeal mb-4">ARTIFICIAL INTELLIGENCE & MACHINE LEARNING STUDENT</h2>
               {/* <h3 className="text-lg font-semibold mt-8 mb-2">ABOUT ME</h3> */}
               <p className="text-base leading-relaxed">
-              I&apos;m
-              studying Artificial Intelligence & Machine Learning at the University of Limerick, where I focus on designing smart, adaptable systems. Through my internship at Dell Technologies, I’ve gained hands-on experience working with real-world data, developing efficient tools, and contributing to innovative tech solutions. I enjoy solving meaningful problems and continuously exploring new ideas in AI, design, and software development.
+                
+              I&apos;m studying Artificial Intelligence & Machine Learning at the University of Limerick, where I focus on designing smart, adaptable systems. Through my internship at Dell Technologies, I&apos;ve gained hands-on experience working with real-world data, developing efficient tools, and contributing to innovative tech solutions. I enjoy solving meaningful problems and continuously exploring new ideas in AI, design, and software development.
               </p>
             </div>
             <div className="flex space-x-6 mt-6 text-sm text-gray-700 dark:text-gray-400">
