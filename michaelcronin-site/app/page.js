@@ -62,7 +62,7 @@ export default function Home() {
               <div className="flex space-x-6 mt-4 text-sm text-gray-600 dark:text-gray-400">
                 <div className="flex items-center space-x-2">
                   <span className="text-xl">📍</span>
-                  <span>Cork, Ireland</span>
+                  <span>Limerick & Cork, Ireland</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-xl">🎓</span>
