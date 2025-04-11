@@ -11,11 +11,8 @@ import SkillsStrip from "../components/SkillsStrip";
 import Tabs from "../components/Tabs";
 import { Analytics } from "@vercel/analytics/react"
 
-
 export default function Home() {
-
-  const underConstruction = true;
-
+  const underConstruction = false;
   const [tab, setTab] = useState("about");
   const [open, setOpen] = useState(-1);
 
@@ -28,25 +25,28 @@ export default function Home() {
     "/photos/photo-6.jpg",
   ];
 
-  const baseTabStyle = "px-4 py-2 border-b-2 font-medium text-gray-500 hover:text-blue-600 hover:border-blue-600 dark:text-gray-400 dark:hover:text-blue-400";
-  const activeTabStyle = "px-4 py-2 border-b-2 font-medium text-blue-600 border-blue-600 dark:text-blue-400";
-if (underConstruction) {
+  const baseTabStyle =
+    "px-4 py-2 border-b-2 font-medium text-wesBrown hover:text-wesTeal hover:border-wesTeal dark:text-wesBrown dark:hover:text-wesTeal";
+  const activeTabStyle =
+    "px-4 py-2 border-b-2 font-medium text-wesTeal border-wesTeal dark:text-wesTeal";
+
+  if (underConstruction) {
     return (
       <main className="min-h-screen bg-yellow-100 flex items-center justify-center text-center px-6">
         <div>
           <h1 className="text-4xl font-bold mb-4 text-yellow-800">🚧 Under Construction</h1>
           <p className="text-lg text-yellow-700 max-w-xl mx-auto">
             Hi Yasmin, I love you - Michael
-            
           </p>
         </div>
       </main>
     );
   }
+
   return (
-    <main className="min-h-screen bg-white text-gray-900 dark:bg-zinc-900 dark:text-gray-100 px-6 md:px-20 pt-0 pb-16 transition-colors duration-300">
-      {/* Tab Buttons */}
-      <div className="flex justify-center space-x-6 border-b mb-12">
+    <main className="min-h-screen bg-wesCream dark:bg-zinc-900 text-wesText dark:text-gray-100 font-wes px-6 md:px-20 pt-0 pb-16 transition-colors duration-300">
+
+      <div className="flex justify-center space-x-6 border-b border-wesBrown mb-12">
         <button className={tab === "about" ? activeTabStyle : baseTabStyle} onClick={() => setTab("about")}>About</button>
         <button className={tab === "projects" ? activeTabStyle : baseTabStyle} onClick={() => setTab("projects")}>Projects</button>
         <button className={tab === "photography" ? activeTabStyle : baseTabStyle} onClick={() => setTab("photography")}>Photography</button>
@@ -54,60 +54,60 @@ if (underConstruction) {
       </div>
 
       {tab === "about" && (
-        <>
-          <section className="flex flex-col md:flex-row md:items-start items-center justify-between md:space-x-12 space-y-10 md:space-y-0">
-            <div className="md:w-1/2 space-y-6">
-              <p className="font-[--font-handwritten] text-2xl text-orange-500 dark:text-orange-400 leading-relaxed max-w-2xl">
-                “Isn&apos;t it enough to see that a garden is beautiful without<br />
-                having to believe that there are fairies at the bottom of it too?”<br />
-                <span className="text-sm text-gray-600 dark:text-gray-400 block mt-2">
-                  ― Douglas Adams, <em>The Hitchhiker’s Guide to the Galaxy</em>
-                </span>
-              </p>
-              <h1 className="text-5xl font-extrabold leading-tight">
-                MICHAEL<br />CRONIN
-              </h1>
-              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                ARTIFICIAL INTELLIGENCE & MACHINE LEARNING STUDENT<br />
-                DELL TECHNOLOGIES INTERN
-              </p>
-              <div>
-                <h2 className="text-lg font-semibold mt-6">ABOUT ME</h2>
-                <p className="text-sm leading-relaxed">
-                  I&apos;m currently studying Artificial Intelligence &amp; Machine Learning at the University of Limerick. As an intern at Dell Technologies, I&apos;m gaining practical experience in the tech industry. I&apos;m passionate about developing intelligent systems and exploring new technologies.
-                </p>
+        <section className="flex flex-col md:flex-row md:items-start items-center justify-between md:space-x-12 space-y-10 md:space-y-0">
+          <div className="md:w-1/2 space-y-10">
+            <blockquote className="border-l-4 border-orange-500 pl-4 italic text-orange-500 text-xl leading-relaxed">
+              “Isn't it enough to see that a garden is beautiful without<br />
+              having to believe that there are fairies at the bottom of it too?”
+              <footer className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                ― Douglas Adams, <em>The Hitchhiker’s Guide to the Galaxy</em>
+              </footer>
+            </blockquote>
+            <div>
+              <h1 className="text-6xl font-extrabold tracking-tight leading-tight mb-2">MICHAEL CRONIN</h1>
+              <h2 className="text-xl font-semibold text-wesTeal mb-4">ARTIFICIAL INTELLIGENCE & MACHINE LEARNING STUDENT</h2>
+              {/* <h3 className="text-lg font-semibold mt-8 mb-2">ABOUT ME</h3> */}
+              <p className="text-base leading-relaxed">
+  I’m studying Artificial Intelligence & Machine Learning at the University of Limerick, where I focus on designing smart, adaptable systems. Through my internship at Dell Technologies, I’ve gained hands-on experience working with real-world data, developing efficient tools, and contributing to innovative tech solutions. I enjoy solving meaningful problems and continuously exploring new ideas in AI, design, and software development.
+</p>
+            </div>
+            <div className="flex space-x-6 mt-6 text-sm text-gray-700 dark:text-gray-400">
+              <div className="flex items-center space-x-2">
+                <span className="text-xl">📍</span>
+                <span>Limerick & Cork, Ireland</span>
               </div>
-              <div className="flex space-x-6 mt-4 text-sm text-gray-600 dark:text-gray-400">
-                <div className="flex items-center space-x-2">
-                  <span className="text-xl">📍</span>
-                  <span>Limerick & Cork, Ireland</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-xl">🎓</span>
-                  <span>University of Limerick</span>
-                </div>
-              </div>
-              <div className="mt-6">
-                <h2 className="text-lg font-semibold">INTERESTS</h2>
-                <p className="text-sm dark:text-gray-300">
-                  Artificial intelligence, machine learning, data science, and technology innovation.
-                </p>
+              <div className="flex items-center space-x-2">
+                <span className="text-xl">🎓</span>
+                <span>University of Limerick</span>
               </div>
             </div>
-            <div className="md:w-1/2 w-full flex justify-center">
-              <Image
-                src="/michael.jpg"
-                alt="Michael Cronin"
-                width={400}
-                height={600}
-                className="rounded-xl shadow-xl object-cover w-full max-w-sm"
-              />
+            <div className="mt-8">
+              <h3 className="text-lg font-semibold mb-2">INTERESTS</h3>
+              <p className="text-base dark:text-gray-300">
+                Artificial intelligence, machine learning, data science, and technology innovation.
+              </p>
             </div>
-          </section>
-
-          <SkillsStrip />
-        </>
+          </div>
+          <div className="md:w-1/2 w-full flex justify-center">
+            <Image
+              src="/michael.jpg"
+              alt="Michael Cronin"
+              width={400}
+              height={600}
+              className="rounded-xl shadow-xl object-cover w-full max-w-sm"
+            />
+          </div>
+        </section>
       )}
+
+      {tab === "about" && (
+        <section className="mt-16">
+          {/* <h2 className="text-center text-xl font-semibold text-wesBrown mb-4">Skills & Tools</h2> */}
+          <SkillsStrip />
+        </section>
+      )}
+    
+
 
 {tab === "projects" && (
   <>
@@ -195,38 +195,40 @@ if (underConstruction) {
 
 
 
-      {tab === "photography" && (
-        <section className="py-16 text-center">
-          {/* <h2 className="text-3xl font-bold mb-4">Photography</h2> */}
-          {/* <p className="text-gray-600 dark:text-gray-300 mb-8">
-            A few moments I’ve captured recently — more on <a href="https://glass.photo/michaelcronin" className="underline text-blue-600 dark:text-blue-400" target="_blank">Glass</a>.
-          </p> */}
-          <div className="overflow-x-auto scrollbar-hide">
-            <div className="flex gap-6 px-4">
-              {images.map((src, i) => (
-                <div
-                  key={i}
-                  onClick={() => setOpen(i)}
-                  className="flex-none overflow-hidden rounded-xl shadow-lg cursor-pointer"
-                >
-                  <img
-                    src={src}
-                    alt={`Photo ${i + 1}`}
-                    className="h-[80vh] w-auto object-contain transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <Lightbox
-            open={open >= 0}
-            close={() => setOpen(-1)}
-            index={open}
-            slides={images.map((src) => ({ src }))}
-            styles={{ container: { backgroundColor: "rgba(0,0,0,0.95)" } }}
-          />
-        </section>
-      )}
+{tab === "photography" && (
+  <section className="px-6 sm:px-12 py-16 w-full">
+
+
+  <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
+    {images.map((src, i) => (
+      <div
+        key={i}
+        onClick={() => setOpen(i)}
+        className="break-inside-avoid cursor-pointer"
+      >
+        <img
+          src={src}
+          alt=""
+          className="w-full h-auto object-cover mb-4"
+        />
+      </div>
+    ))}
+  </div>
+
+  <Lightbox
+    open={open >= 0}
+    close={() => setOpen(-1)}
+    index={open}
+    slides={images.map((src) => ({ src }))}
+    styles={{ container: { backgroundColor: "rgba(0,0,0,0.95)" } }}
+  />
+</section>
+
+
+)}
+
+
+
 
       {tab === "contact" && (
         <section className="py-12 text-center">

@@ -11,7 +11,7 @@ export default function SkillsStrip() {
             key={i}
             src={`/skills/${img}`}
             alt={img.replace(/\.(svg|png)$/, "")}
-            className="h-24 w-auto object-contain inline-block"
+            className="h-16 sm:h-20 w-auto object-contain mx-4 my-2 transition-transform hover:scale-105"
             title={img.replace(/\.(svg|png)/, "")} // tooltip on hover
           />
         ))}
