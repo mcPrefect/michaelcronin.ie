@@ -8,8 +8,13 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { logos } from "../data/skills";
 import SkillsStrip from "../components/SkillsStrip";
+import Tabs from "../components/Tabs";
+
 
 export default function Home() {
+
+  const underConstruction = true;
+
   const [tab, setTab] = useState("about");
   const [open, setOpen] = useState(-1);
 
@@ -24,7 +29,19 @@ export default function Home() {
 
   const baseTabStyle = "px-4 py-2 border-b-2 font-medium text-gray-500 hover:text-blue-600 hover:border-blue-600 dark:text-gray-400 dark:hover:text-blue-400";
   const activeTabStyle = "px-4 py-2 border-b-2 font-medium text-blue-600 border-blue-600 dark:text-blue-400";
-
+if (underConstruction) {
+    return (
+      <main className="min-h-screen bg-yellow-100 flex items-center justify-center text-center px-6">
+        <div>
+          <h1 className="text-4xl font-bold mb-4 text-yellow-800">🚧 Under Construction</h1>
+          <p className="text-lg text-yellow-700 max-w-xl mx-auto">
+            This portfolio is currently being built! Check back soon for updates, projects, and polished content. Hi Yasmin 
+            
+          </p>
+        </div>
+      </main>
+    );
+  }
   return (
     <main className="min-h-screen bg-white text-gray-900 dark:bg-zinc-900 dark:text-gray-100 px-6 md:px-20 pt-0 pb-16 transition-colors duration-300">
       {/* Tab Buttons */}
