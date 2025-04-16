@@ -1,6 +1,6 @@
 "use client";
 
-// import { useState } from "react";
+import { useState } from "react";
 import { FaGithub, FaLinkedin, FaCameraRetro } from "react-icons/fa";
 import Image from "next/image";
 import DarkModeToggle from "../components/DarkModeToggle";
@@ -14,7 +14,7 @@ import { Analytics } from "@vercel/analytics/react"
 export default function Home() {
   const underConstruction = false;
   // const [tab, setTab] = useState("about");
-  // const [open, setOpen] = useState(-1);
+  const [open, setOpen] = useState(-1);
 
   const images = [
     "/photos/photo-1.jpg",
@@ -60,7 +60,7 @@ export default function Home() {
               “Isn&#39;t it enough to see that a garden is beautiful without<br />
               having to believe that there are fairies at the bottom of it too?”
               <footer className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                ― Douglas Adams, <em>The Hitchhiker’s Guide to the Galaxy</em>
+                ― Douglas Adams, <em>The Hitchhiker&apos;s Guide to the Galaxy</em>
               </footer>
             </blockquote>
             <div>
@@ -68,7 +68,6 @@ export default function Home() {
               <h2 className="text-xl font-semibold text-wesTeal mb-4">ARTIFICIAL INTELLIGENCE & MACHINE LEARNING STUDENT</h2>
               {/* <h3 className="text-lg font-semibold mt-8 mb-2">ABOUT ME</h3> */}
               <p className="text-base leading-relaxed">
-
                 I&apos;m studying Artificial Intelligence & Machine Learning at the University of Limerick, where I focus on designing smart, adaptable systems. Through my internship at Dell Technologies, I&apos;ve gained hands-on experience working with real-world data, developing efficient tools, and contributing to innovative tech solutions. I enjoy solving meaningful problems and continuously exploring new ideas in AI, design, and software development.
               </p>
             </div>
@@ -89,14 +88,19 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="md:w-1/2 w-full flex justify-center">
-            <Image
-              src="/michael.jpg"
-              alt="Michael Cronin"
-              width={400}
-              height={600}
-              className="rounded-xl shadow-xl object-cover w-full max-w-sm"
-            />
+          <div className="md:w-1/2 w-full flex flex-col items-center justify-center">
+            <div className="w-full max-w-sm">
+              <Image
+                src="/michael.jpg"
+                alt="Michael Cronin"
+                width={400}
+                height={600}
+                className="rounded-xl shadow-xl object-cover w-full"
+              />
+              <div className="mt-2 text-sm text-gray-600 dark:text-gray-400 italic">
+                Captured by Yasmin <span className="text-orange-500">❤</span>
+              </div>
+            </div>
           </div>
         </section>
       </section>
@@ -104,7 +108,7 @@ export default function Home() {
 
 
       <section className="mt-16">
-        {/* <h2 className="text-center text-xl font-semibold text-wesBrown mb-4">Skills & Tools</h2> */}
+        {/* <h2 className="text-4xl font-bold mb-12">Skills & Tools I Have...</h2> */}
         <SkillsStrip />
       </section>
 
@@ -113,7 +117,7 @@ export default function Home() {
 
 
       <>
-        <section className="py-16 text-center">
+        <section className="py-16">
           <h2 className="text-4xl font-bold mb-12">Stuff I've Done...</h2>
 
           <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
@@ -172,9 +176,9 @@ export default function Home() {
                 codeLink: "#",
                 tags: ["n8n", "Automation", "Agents", "Web Scraping"],
               }
-              
-              
-              
+
+
+
             ]
 
               .map((project, idx) => (
@@ -198,7 +202,7 @@ export default function Home() {
                       ))}
                     </div>
 
-{/* 
+                    {/* 
                     <div className="flex gap-4 mt-4">
                       <a
                         href={project.liveLink}
@@ -241,7 +245,7 @@ export default function Home() {
 
 
       <section className="px-6 sm:px-12 py-16 w-full">
-
+        <h2 className="text-4xl font-bold mb-12">Photos I've Taken...</h2>
 
         <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
           {images.map((src, i) => (
@@ -260,9 +264,9 @@ export default function Home() {
         </div>
 
         <Lightbox
-          // open={open >= 0}
-          // close={() => setOpen(-1)}
-          // index={open}
+          open={open >= 0}
+          close={() => setOpen(-1)}
+          index={open}
           slides={images.map((src) => ({ src }))}
           styles={{ container: { backgroundColor: "rgba(0,0,0,0.95)" } }}
         />
