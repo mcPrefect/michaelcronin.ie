@@ -118,7 +118,7 @@ export default function Home() {
 
       <>
         <section className="py-16">
-          <h2 className="text-4xl font-bold mb-12">Stuff I've Done...</h2>
+          <h2 className="text-4xl font-bold mb-12">Stuff I&apos;ve Done...</h2>
 
           <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
             {[
