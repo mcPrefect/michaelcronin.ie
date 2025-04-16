@@ -152,8 +152,18 @@ export default function Home() {
                 image: "/projects/data-analyst.png",
                 liveLink: "#",
                 codeLink: "#",
-                tags: ["Streamlit", "PandasAI", "Ollama", "Data Viz"],
+                tags: ["Streamlit", "PandasAI", "Ollama"],
+              },
+              {
+                title: "Multimodal AI Inference Server",
+                description:
+                  "Built a local inference pipeline using vLLM to serve Pixtral, a multimodal vision-language model from Hugging Face. The setup mimics OpenAI's API and connects to Open WebUI for interactive image+text analysis.",
+                image: "/projects/pixtral-server.png",
+                liveLink: "#",
+                codeLink: "#",
+                tags: ["vLLM", "Pixtral", "Hugging Face", "Multimodal"],
               }
+              
               
             ]
 
