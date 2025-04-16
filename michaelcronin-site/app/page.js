@@ -57,7 +57,7 @@ export default function Home() {
         <section className="pt-16 flex flex-col md:flex-row md:items-start items-center justify-between md:space-x-12 space-y-10 md:space-y-0">
           <div className="md:w-1/2 space-y-10">
             <blockquote className="border-l-4 border-orange-500 pl-4 italic text-orange-500 text-xl leading-relaxed">
-              “Isn't it enough to see that a garden is beautiful without<br />
+              “Isn&#39;t it enough to see that a garden is beautiful without<br />
               having to believe that there are fairies at the bottom of it too?”
               <footer className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                 ― Douglas Adams, <em>The Hitchhiker’s Guide to the Galaxy</em>
@@ -68,8 +68,8 @@ export default function Home() {
               <h2 className="text-xl font-semibold text-wesTeal mb-4">ARTIFICIAL INTELLIGENCE & MACHINE LEARNING STUDENT</h2>
               {/* <h3 className="text-lg font-semibold mt-8 mb-2">ABOUT ME</h3> */}
               <p className="text-base leading-relaxed">
-                
-              I&apos;m studying Artificial Intelligence & Machine Learning at the University of Limerick, where I focus on designing smart, adaptable systems. Through my internship at Dell Technologies, I&apos;ve gained hands-on experience working with real-world data, developing efficient tools, and contributing to innovative tech solutions. I enjoy solving meaningful problems and continuously exploring new ideas in AI, design, and software development.
+
+                I&apos;m studying Artificial Intelligence & Machine Learning at the University of Limerick, where I focus on designing smart, adaptable systems. Through my internship at Dell Technologies, I&apos;ve gained hands-on experience working with real-world data, developing efficient tools, and contributing to innovative tech solutions. I enjoy solving meaningful problems and continuously exploring new ideas in AI, design, and software development.
               </p>
             </div>
             <div className="flex space-x-6 mt-6 text-sm text-gray-700 dark:text-gray-400">
@@ -114,9 +114,9 @@ export default function Home() {
 
       <>
         <section className="py-16 text-center">
-          <h2 className="text-4xl font-bold mb-12">Projects</h2>
+          {/* <h2 className="text-4xl font-bold mb-12">Projects</h2> */}
 
-          <div className="flex flex-col space-y-24 max-w-6xl mx-auto px-4">
+          <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
             {[
               {
                 title: "AI Portfolio Site",
@@ -125,6 +125,7 @@ export default function Home() {
                 image: "/projects/portfolio.png",
                 liveLink: "#",
                 codeLink: "#",
+                tags: ["Next.js", "Tailwind", "Vercel"],
               },
               {
                 title: "Dell AI Intern Tools",
@@ -133,6 +134,7 @@ export default function Home() {
                 image: "/projects/dell-tools.png",
                 liveLink: "#",
                 codeLink: "#",
+                tags: ["Python", "Automation", "Data Engineering"],
               },
               {
                 title: "Plastic Type Detection with MML",
@@ -141,6 +143,7 @@ export default function Home() {
                 image: "/projects/plastic.png",
                 liveLink: "#",
                 codeLink: "#",
+                tags: ["MML", "CNN", "Hyperspectral"],
               },
               {
                 title: "Toonify – Image Cartoonizer App",
@@ -149,44 +152,61 @@ export default function Home() {
                 image: "/projects/toonify.png",
                 liveLink: "#",
                 codeLink: "#",
+                tags: ["Streamlit", "Docker", "Image Processing"],
               },
-            ].map((project, idx) => (
-              <div
-                key={idx}
-                className="flex flex-col md:flex-row items-center gap-10 bg-zinc-100 dark:bg-zinc-800 rounded-2xl shadow-xl p-6"
-              >
-                {/* Text */}
-                <div className="md:w-1/2 text-left space-y-4">
-                  <h3 className="text-3xl font-semibold">{project.title}</h3>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm">{project.description}</p>
-                  <div className="flex gap-4 mt-4">
-                    <a
-                      href={project.liveLink}
-                      target="_blank"
-                      className="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition"
-                    >
-                      Live App
-                    </a>
-                    <a
-                      href={project.codeLink}
-                      target="_blank"
-                      className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline"
-                    >
-                      Learn More
-                    </a>
+            ]
+              .map((project, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col md:flex-row items-center gap-10 bg-zinc-100 dark:bg-zinc-800 rounded-2xl shadow-xl p-6 hover:scale-[1.02] hover:shadow-2xl transition duration-300"
+                >
+
+                  {/* Text */}
+                  <div className="md:w-1/2 text-left space-y-4">
+                    <h3 className="text-3xl font-semibold">{project.title}</h3>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs bg-zinc-200 text-zinc-800 dark:bg-zinc-700 dark:text-zinc-200 px-2 py-1 rounded"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+
+                    <div className="flex gap-4 mt-4">
+                      <a
+                        href={project.liveLink}
+                        target="_blank"
+                        className="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition"
+                      >
+                        Live App
+                      </a>
+                      <a
+                        href={project.codeLink}
+                        target="_blank"
+                        className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+                      >
+                        Learn More
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Image */}
+                  <div className="md:w-1/2 flex justify-center">
+                    <Image
+                    alt="Project Image"
+                      src={project.image}
+                      width={400}
+                      height={250}
+                      className="rounded-xl w-full object-cover"
+                    />
                   </div>
                 </div>
-
-                {/* Image */}
-                <div className="md:w-1/2 flex justify-center">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="rounded-xl max-h-[400px] w-full object-contain bg-black p-4"
-                  />
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </section>
 
