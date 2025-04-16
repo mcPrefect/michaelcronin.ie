@@ -114,7 +114,7 @@ export default function Home() {
 
       <>
         <section className="py-16 text-center">
-          {/* <h2 className="text-4xl font-bold mb-12">Projects</h2> */}
+          <h2 className="text-4xl font-bold mb-12">Projects I've worked on</h2>
 
           <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
             {[
@@ -162,7 +162,17 @@ export default function Home() {
                 liveLink: "#",
                 codeLink: "#",
                 tags: ["vLLM", "Pixtral", "Hugging Face", "Multimodal"],
+              },
+              {
+                title: "Autonomous Agents with n8n",
+                description:
+                  "Built a modular agent system using n8n to automate tasks like scraping web content, managing Gmail inboxes, and checking calendar availability. Each workflow is customizable and runs with minimal user input.",
+                image: "/projects/agents-n8n.png",
+                liveLink: "#",
+                codeLink: "#",
+                tags: ["n8n", "Automation", "Agents", "Web Scraping"],
               }
+              
               
               
             ]
