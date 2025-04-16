@@ -119,42 +119,44 @@ export default function Home() {
           <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
             {[
               {
-                title: "AI Portfolio Site",
+                title: "Portfolio Website",
                 description:
-                  "A personal portfolio built with Next.js, Tailwind, and deployed on Vercel. Includes tabs, dark mode, and photography lightbox.",
+                  "Fully responsive personal site built with Next.js and Tailwind. Features dark mode, animated tabs, and a photography lightbox gallery. Deployed on Vercel.",
                 image: "/projects/portfolio.png",
                 liveLink: "#",
                 codeLink: "#",
                 tags: ["Next.js", "Tailwind", "Vercel"],
               },
               {
-                title: "Dell AI Intern Tools",
+                title: "Plastic Type Classifier",
                 description:
-                  "Internal tools I worked on at Dell to streamline data preparation and model deployment workflows.",
-                image: "/projects/dell-tools.png",
-                liveLink: "#",
-                codeLink: "#",
-                tags: ["Python", "Automation", "Data Engineering"],
-              },
-              {
-                title: "Plastic Type Detection with MML",
-                description:
-                  "Multimodal ML model using 2D-CNNs on hyperspectral plastic images. Users can upload photos to identify plastic types and get associated cancer risks.",
+                  "Multimodal pipeline using CNNs on hyperspectral imagery to detect plastic types and link them to health risk profiles.",
                 image: "/projects/plastic.png",
                 liveLink: "#",
                 codeLink: "#",
                 tags: ["MML", "CNN", "Hyperspectral"],
               },
               {
-                title: "Toonify – Image Cartoonizer App",
+                title: "AI Image Generation",
                 description:
-                  "Fooocus-based app that converts user-uploaded photos to cartoon versions. Built with Streamlit and Docker.",
+                  "Streamlit app powered by Fooocus that converts photos into stylized cartoon art. Runs in Docker with a simple UI.",
                 image: "/projects/toonify.png",
                 liveLink: "#",
                 codeLink: "#",
-                tags: ["Streamlit", "Docker", "Image Processing"],
+                tags: ["Streamlit", "Docker", "Fooocus"],
               },
+              {
+                title: "AI Data Analyst Dashboard",
+                description:
+                  "Interactive Streamlit app that combines PandasAI with an Ollama LLM backend. Users can upload CSVs and ask natural-language questions to generate insights, plots, and summaries automatically.",
+                image: "/projects/data-analyst.png",
+                liveLink: "#",
+                codeLink: "#",
+                tags: ["Streamlit", "PandasAI", "Ollama", "Data Viz"],
+              }
+              
             ]
+
               .map((project, idx) => (
                 <div
                   key={idx}
@@ -176,7 +178,7 @@ export default function Home() {
                       ))}
                     </div>
 
-
+{/* 
                     <div className="flex gap-4 mt-4">
                       <a
                         href={project.liveLink}
@@ -192,13 +194,13 @@ export default function Home() {
                       >
                         Learn More
                       </a>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* Image */}
                   <div className="md:w-1/2 flex justify-center">
                     <Image
-                    alt="Project Image"
+                      alt="Project Image"
                       src={project.image}
                       width={400}
                       height={250}
