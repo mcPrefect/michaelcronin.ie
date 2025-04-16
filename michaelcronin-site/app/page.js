@@ -245,7 +245,7 @@ export default function Home() {
 
 
       <section className="px-6 sm:px-12 py-16 w-full">
-        <h2 className="text-4xl font-bold mb-12">Photos I've Taken...</h2>
+        <h2 className="text-4xl font-bold mb-12">Photos I&apos;ve Taken...</h2>
 
         <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
           {images.map((src, i) => (
