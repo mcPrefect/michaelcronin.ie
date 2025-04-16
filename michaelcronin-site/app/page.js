@@ -57,7 +57,7 @@ export default function Home() {
         <section className="pt-16 flex flex-col md:flex-row md:items-start items-center justify-between md:space-x-12 space-y-10 md:space-y-0">
           <div className="md:w-1/2 space-y-10">
             <blockquote className="border-l-4 border-orange-500 pl-4 italic text-orange-500 text-xl leading-relaxed">
-              “Isn&#39;t it enough to see that a garden is beautiful without<br />
+              “Isn&apos;t it enough to see that a garden is beautiful without<br />
               having to believe that there are fairies at the bottom of it too?”
               <footer className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                 ― Douglas Adams, <em>The Hitchhiker&apos;s Guide to the Galaxy</em>
