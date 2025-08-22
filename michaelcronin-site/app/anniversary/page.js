@@ -15,8 +15,8 @@ export default function Anniversary() {
     },
     {
       date: "February 14, 2024",
-      title: "First Valentine's Day",
-      description: "Our first Valentine's Day together. You made everything feel magical.",
+      title: "First Valentine&apos;s Day",
+      description: "Our first Valentine&apos;s Day together. You made everything feel magical.",
       image: "/anniversary/valentines.jpg",
       emoji: "💕"
     },
@@ -51,7 +51,7 @@ export default function Anniversary() {
     {
       date: "January 15, 2025",
       title: "One Year Anniversary",
-      description: "365 days of love, laughter, and endless joy. Here's to forever with you, Yasmin. ❤️",
+      description: "365 days of love, laughter, and endless joy. Here&apos;s to forever with you, Yasmin. ❤️",
       image: "/anniversary/one-year.jpg",
       emoji: "🥂"
     }
