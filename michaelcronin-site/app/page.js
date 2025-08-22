@@ -10,11 +10,15 @@ import { logos } from "../data/skills";
 import SkillsStrip from "../components/SkillsStrip";
 // import Tabs from "../components/Tabs";
 import { Analytics } from "@vercel/analytics/react"
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const underConstruction = false;
   // const [tab, setTab] = useState("about");
   const [open, setOpen] = useState(-1);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const images = [
     "/photos/photo-1.jpg",
@@ -24,6 +28,16 @@ export default function Home() {
     "/photos/photo-5.jpg",
     "/photos/photo-6.jpg",
   ];
+
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    if (password === "ouranniversary2024") {
+      router.push("/anniversary");
+    } else {
+      alert("Incorrect password!");
+      setPassword("");
+    }
+  };
 
   const baseTabStyle =
     "px-4 py-2 border-b-2 font-medium text-wesBrown hover:text-wesTeal hover:border-wesTeal dark:text-wesBrown dark:hover:text-wesTeal";
@@ -297,8 +311,50 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Secret Button */}
+      <button
+        onClick={() => setShowPasswordModal(true)}
+        className="fixed bottom-4 left-4 w-4 h-4 bg-transparent hover:bg-pink-500 transition-all duration-300 rounded-full opacity-20 hover:opacity-100"
+        title="❤"
+      >
+      </button>
 
-
+      {/* Password Modal */}
+      {showPasswordModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-zinc-800 p-8 rounded-xl shadow-xl max-w-md w-full mx-4">
+            <h3 className="text-xl font-semibold mb-4 text-center">Enter Password</h3>
+            <form onSubmit={handlePasswordSubmit} className="space-y-4">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password..."
+                className="w-full px-4 py-2 border border-gray-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-700 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                autoFocus
+              />
+              <div className="flex space-x-4">
+                <button
+                  type="submit"
+                  className="flex-1 bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg transition"
+                >
+                  Enter
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowPasswordModal(false);
+                    setPassword("");
+                  }}
+                  className="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       <DarkModeToggle />
 
