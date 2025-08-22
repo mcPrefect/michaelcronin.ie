@@ -12,7 +12,7 @@ import SkillsStrip from "../components/SkillsStrip";
 import { Analytics } from "@vercel/analytics/react"
 
 export default function Home() {
-  const underConstruction = true;
+  const underConstruction = false;
   // const [tab, setTab] = useState("about");
   const [open, setOpen] = useState(-1);
 
