@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 export default function Anniversary() {
   const router = useRouter();
@@ -126,10 +124,10 @@ export default function Anniversary() {
             To My Beautiful Yasmin
           </h2>
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed italic">
-            "This past year has been the most amazing year of my life, and it's all because of you. 
+            &ldquo;This past year has been the most amazing year of my life, and it&apos;s all because of you. 
             Every day with you feels like a new adventure, filled with love, laughter, and endless joy. 
-            You make everything brighter, and I can't wait to create countless more memories together. 
-            Happy anniversary, my love. Here's to forever with you."
+            You make everything brighter, and I can&apos;t wait to create countless more memories together. 
+            Happy anniversary, my love. Here&apos;s to forever with you.&rdquo;
           </p>
           <div className="text-2xl mt-6">💕</div>
           <p className="text-pink-600 dark:text-pink-400 font-semibold mt-2">
