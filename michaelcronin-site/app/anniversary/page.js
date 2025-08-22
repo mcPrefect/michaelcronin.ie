@@ -11,49 +11,96 @@ export default function Anniversary() {
       title: "Our First Date",
       description: "We met for coffee and talked for hours. I knew there was something special about you.",
       image: "/anniversary/first-date.jpg",
-      emoji: "☕"
+      emoji: "☕",
+      theme: "coffee",
+      bgGradient: "from-amber-100 to-orange-100 dark:from-amber-900 dark:to-orange-900",
+      dotColor: "bg-amber-500",
+      titleColor: "text-amber-600 dark:text-amber-400",
+      icons: ["☕", "💬", "✨"]
     },
     {
-      date: "February 14, 2024",
-      title: "First Valentine&apos;s Day",
-      description: "Our first Valentine&apos;s Day together. You made everything feel magical.",
-      image: "/anniversary/valentines.jpg",
-      emoji: "💕"
+      date: "March 8, 2024",
+      title: "Pizza Night Tradition Begins",
+      description: "Our first pizza date that started our weekly tradition. You always steal my pepperoni and I love it!",
+      image: "/anniversary/pizza.jpg",
+      emoji: "🍕",
+      theme: "pizza",
+      bgGradient: "from-red-100 to-yellow-100 dark:from-red-900 dark:to-yellow-900",
+      dotColor: "bg-red-500",
+      titleColor: "text-red-600 dark:text-red-400",
+      icons: ["🍕", "🧀", "❤️", "🍕"]
     },
     {
-      date: "March 22, 2024",
+      date: "April 22, 2024",
+      title: "Bravest Warriors Marathon",
+      description: "We discovered our shared love for Bravest Warriors! Catbug became our spirit animal and we&apos;ve been quoting it ever since.",
+      image: "/anniversary/bravest-warriors.jpg",
+      emoji: "🐛",
+      theme: "bravest-warriors",
+      bgGradient: "from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900",
+      dotColor: "bg-purple-500",
+      titleColor: "text-purple-600 dark:text-purple-400",
+      icons: ["🐛", "🌟", "🚀", "💫"]
+    },
+    {
+      date: "June 15, 2024",
+      title: "First DJO Concert",
+      description: "Our first concert together seeing DJO! Dancing badly and singing along to all the songs. Perfect night.",
+      image: "/anniversary/djo.jpg",
+      emoji: "🎵",
+      theme: "djo",
+      bgGradient: "from-indigo-100 to-cyan-100 dark:from-indigo-900 dark:to-cyan-900",
+      dotColor: "bg-indigo-500",
+      titleColor: "text-indigo-600 dark:text-indigo-400",
+      icons: ["🎵", "🎤", "🕺", "💃"]
+    },
+    {
+      date: "August 20, 2024",
       title: "Made It Official",
-      description: "The day we became official. Best decision I ever made.",
+      description: "The day we became official. Best decision I ever made. You said yes and my heart exploded!",
       image: "/anniversary/official.jpg",
-      emoji: "💍"
+      emoji: "💍",
+      theme: "official",
+      bgGradient: "from-pink-100 to-rose-100 dark:from-pink-900 dark:to-rose-900",
+      dotColor: "bg-pink-500",
+      titleColor: "text-pink-600 dark:text-pink-400",
+      icons: ["💍", "💕", "🥰", "✨"]
     },
     {
-      date: "June 10, 2024",
-      title: "First Trip Together",
-      description: "Our amazing weekend getaway. So many beautiful memories made.",
-      image: "/anniversary/trip.jpg",
-      emoji: "✈️"
-    },
-    {
-      date: "August 5, 2024",
-      title: "Meeting the Families",
-      description: "The day our families met. Everyone loves you as much as I do.",
-      image: "/anniversary/families.jpg",
-      emoji: "👨‍👩‍👧‍👦"
+      date: "October 31, 2024",
+      title: "Halloween Shenanigans",
+      description: "Our first Halloween together! You looked incredible in your costume and we ate way too much candy.",
+      image: "/anniversary/halloween.jpg",
+      emoji: "🎃",
+      theme: "halloween",
+      bgGradient: "from-orange-100 to-purple-100 dark:from-orange-900 dark:to-purple-900",
+      dotColor: "bg-orange-500",
+      titleColor: "text-orange-600 dark:text-orange-400",
+      icons: ["🎃", "👻", "🍭", "🧙‍♀️"]
     },
     {
       date: "December 25, 2024",
       title: "First Christmas Together",
-      description: "Our first Christmas as a couple. The most wonderful time of the year became even better.",
+      description: "Our first Christmas as a couple. The most wonderful time of the year became even better with you.",
       image: "/anniversary/christmas.jpg",
-      emoji: "🎄"
+      emoji: "🎄",
+      theme: "christmas",
+      bgGradient: "from-green-100 to-red-100 dark:from-green-900 dark:to-red-900",
+      dotColor: "bg-green-500",
+      titleColor: "text-green-600 dark:text-green-400",
+      icons: ["🎄", "🎁", "❄️", "⭐"]
     },
     {
       date: "January 15, 2025",
       title: "One Year Anniversary",
       description: "365 days of love, laughter, and endless joy. Here&apos;s to forever with you, Yasmin. ❤️",
       image: "/anniversary/one-year.jpg",
-      emoji: "🥂"
+      emoji: "🥂",
+      theme: "anniversary",
+      bgGradient: "from-gold-100 to-yellow-100 dark:from-yellow-900 dark:to-amber-900",
+      dotColor: "bg-yellow-500",
+      titleColor: "text-yellow-600 dark:text-yellow-400",
+      icons: ["🥂", "💖", "🌟", "♾️"]
     }
   ];
 
@@ -88,27 +135,46 @@ export default function Anniversary() {
           {timelineEvents.map((event, index) => (
             <div key={index} className="relative flex items-start mb-16 last:mb-0">
               {/* Timeline dot */}
-              <div className="absolute left-6 w-5 h-5 bg-pink-500 rounded-full border-4 border-white dark:border-zinc-900 shadow-lg z-10"></div>
+              <div className={`absolute left-6 w-5 h-5 ${event.dotColor} rounded-full border-4 border-white dark:border-zinc-900 shadow-lg z-10`}></div>
               
               {/* Content */}
-              <div className="ml-20 bg-white dark:bg-zinc-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+              <div className={`ml-20 bg-gradient-to-br ${event.bgGradient} rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border border-white/50 dark:border-zinc-700/50`}>
+                
+                {/* Floating themed icons */}
+                <div className="absolute -top-2 -right-2 flex space-x-1">
+                  {event.icons.map((icon, idx) => (
+                    <span 
+                      key={idx}
+                      className="text-lg opacity-60 hover:opacity-100 transition-opacity animate-pulse"
+                      style={{ animationDelay: `${idx * 0.5}s` }}
+                    >
+                      {icon}
+                    </span>
+                  ))}
+                </div>
+
                 <div className="flex items-center mb-3">
-                  <span className="text-2xl mr-3">{event.emoji}</span>
+                  <span className="text-3xl mr-3 drop-shadow-lg">{event.emoji}</span>
                   <div>
-                    <h3 className="text-xl font-bold text-pink-600 dark:text-pink-400">{event.title}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{event.date}</p>
+                    <h3 className={`text-xl font-bold ${event.titleColor} drop-shadow-sm`}>{event.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">{event.date}</p>
                   </div>
                 </div>
                 
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                <p className="text-gray-800 dark:text-gray-200 leading-relaxed mb-4 text-sm">
                   {event.description}
                 </p>
                 
-                {/* Placeholder for image */}
-                <div className="w-full h-64 bg-gradient-to-br from-pink-100 to-rose-100 dark:from-zinc-700 dark:to-zinc-600 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-gray-500 dark:text-gray-400">
-                    <div className="text-4xl mb-2">{event.emoji}</div>
-                    <p className="text-sm">Photo coming soon...</p>
+                {/* Themed placeholder for image */}
+                <div className={`w-full h-64 bg-gradient-to-br ${event.bgGradient} rounded-lg flex items-center justify-center border-2 border-white/30 dark:border-zinc-600/30`}>
+                  <div className="text-center">
+                    <div className="flex justify-center space-x-2 mb-3">
+                      {event.icons.map((icon, idx) => (
+                        <span key={idx} className="text-3xl opacity-40">{icon}</span>
+                      ))}
+                    </div>
+                    <div className="text-5xl mb-2 drop-shadow-lg">{event.emoji}</div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">Photo coming soon...</p>
                   </div>
                 </div>
               </div>
