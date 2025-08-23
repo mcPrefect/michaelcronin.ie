@@ -1,9 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Anniversary() {
   const router = useRouter();
+  const [playingAudio, setPlayingAudio] = useState(null);
+  const [playingVideo, setPlayingVideo] = useState(null);
   
   const timelineEvents = [
     {
@@ -28,7 +31,27 @@ export default function Anniversary() {
       bgGradient: "from-red-100 to-yellow-100 dark:from-red-900 dark:to-yellow-900",
       dotColor: "bg-red-500",
       titleColor: "text-red-600 dark:text-red-400",
-      icons: ["🍕", "🧀", "❤️", "🍕"]
+      icons: ["🍕", "🧀", "❤️", "🍕"],
+      whatsappMessages: [
+        {
+          sender: "Michael",
+          message: "Pizza tonight? 🍕",
+          time: "7:32 PM",
+          type: "sent"
+        },
+        {
+          sender: "Yasmin",
+          message: "YES! But I&apos;m stealing all your pepperoni again 😈",
+          time: "7:35 PM",
+          type: "received"
+        },
+        {
+          sender: "Michael",
+          message: "I wouldn&apos;t have it any other way ❤️",
+          time: "7:36 PM",
+          type: "sent"
+        }
+      ]
     },
     {
       date: "April 22, 2024",
@@ -52,7 +75,18 @@ export default function Anniversary() {
       bgGradient: "from-indigo-100 to-cyan-100 dark:from-indigo-900 dark:to-cyan-900",
       dotColor: "bg-indigo-500",
       titleColor: "text-indigo-600 dark:text-indigo-400",
-      icons: ["🎵", "🎤", "🕺", "💃"]
+      icons: ["🎵", "🎤", "🕺", "💃"],
+      voiceMessage: {
+        url: "/anniversary/voice/djo-concert.mp3",
+        duration: "0:45",
+        transcript: "Oh my god Michael, this concert is AMAZING! I love you so much!"
+      },
+      video: {
+        url: "/anniversary/videos/djo-dancing.mp4",
+        thumbnail: "/anniversary/thumbnails/djo-dancing.jpg",
+        duration: "1:23",
+        title: "Us dancing badly at DJO 😂"
+      }
     },
     {
       date: "August 20, 2024",
@@ -103,6 +137,88 @@ export default function Anniversary() {
       icons: ["🥂", "💖", "🌟", "♾️"]
     }
   ];
+
+  // WhatsApp Message Component
+  const WhatsAppMessage = ({ message, type, sender, time }) => (
+    <div className={`flex ${type === 'sent' ? 'justify-end' : 'justify-start'} mb-2`}>
+      <div className={`max-w-xs px-4 py-2 rounded-lg ${
+        type === 'sent' 
+          ? 'bg-green-500 text-white rounded-br-none' 
+          : 'bg-white dark:bg-zinc-700 text-gray-800 dark:text-gray-200 rounded-bl-none border border-gray-200 dark:border-zinc-600'
+      }`}>
+        <p className="text-sm">{message}</p>
+        <p className={`text-xs mt-1 ${
+          type === 'sent' ? 'text-green-100' : 'text-gray-500 dark:text-gray-400'
+        }`}>
+          {time}
+        </p>
+      </div>
+    </div>
+  );
+
+  // Voice Message Component
+  const VoiceMessage = ({ voiceMessage, eventIndex }) => {
+    const isPlaying = playingAudio === eventIndex;
+    
+    return (
+      <div className="bg-white/50 dark:bg-zinc-800/50 rounded-lg p-4 border border-gray-200 dark:border-zinc-600">
+        <div className="flex items-center space-x-3">
+          <button
+            onClick={() => setPlayingAudio(isPlaying ? null : eventIndex)}
+            className="w-10 h-10 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white transition"
+          >
+            {isPlaying ? '⏸️' : '▶️'}
+          </button>
+          <div className="flex-1">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-sm font-medium">Voice Message</span>
+              <span className="text-xs text-gray-500">{voiceMessage.duration}</span>
+            </div>
+            <div className="w-full bg-gray-200 dark:bg-zinc-600 rounded-full h-2">
+              <div className={`bg-green-500 h-2 rounded-full transition-all duration-300 ${
+                isPlaying ? 'w-full' : 'w-0'
+              }`}></div>
+            </div>
+          </div>
+        </div>
+        {voiceMessage.transcript && (
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 italic">
+            &ldquo;{voiceMessage.transcript}&rdquo;
+          </p>
+        )}
+      </div>
+    );
+  };
+
+  // Video Player Component
+  const VideoPlayer = ({ video, eventIndex }) => {
+    const isPlaying = playingVideo === eventIndex;
+    
+    return (
+      <div className="bg-white/50 dark:bg-zinc-800/50 rounded-lg overflow-hidden border border-gray-200 dark:border-zinc-600">
+        <div className="relative">
+          <div className="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-zinc-700 dark:to-zinc-600 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-4xl mb-2">🎥</div>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Video: {video.title}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-500">{video.duration}</p>
+            </div>
+          </div>
+          <button
+            onClick={() => setPlayingVideo(isPlaying ? null : eventIndex)}
+            className="absolute inset-0 bg-black/20 hover:bg-black/30 transition flex items-center justify-center"
+          >
+            <div className="w-16 h-16 bg-white/90 hover:bg-white rounded-full flex items-center justify-center">
+              <span className="text-2xl ml-1">{isPlaying ? '⏸️' : '▶️'}</span>
+            </div>
+          </button>
+        </div>
+        <div className="p-3">
+          <p className="text-sm font-medium">{video.title}</p>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-red-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 text-gray-800 dark:text-gray-100 font-wes">
@@ -164,6 +280,38 @@ export default function Anniversary() {
                 <p className="text-gray-800 dark:text-gray-200 leading-relaxed mb-4 text-sm">
                   {event.description}
                 </p>
+                
+                {/* Multimedia Content */}
+                <div className="space-y-4 mb-4">
+                  {/* WhatsApp Messages */}
+                  {event.whatsappMessages && (
+                    <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
+                      <div className="flex items-center mb-3">
+                        <span className="text-lg mr-2">💬</span>
+                        <span className="text-sm font-medium text-green-700 dark:text-green-300">WhatsApp Messages</span>
+                      </div>
+                      {event.whatsappMessages.map((msg, idx) => (
+                        <WhatsAppMessage 
+                          key={idx}
+                          message={msg.message}
+                          type={msg.type}
+                          sender={msg.sender}
+                          time={msg.time}
+                        />
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Voice Message */}
+                  {event.voiceMessage && (
+                    <VoiceMessage voiceMessage={event.voiceMessage} eventIndex={index} />
+                  )}
+
+                  {/* Video */}
+                  {event.video && (
+                    <VideoPlayer video={event.video} eventIndex={index} />
+                  )}
+                </div>
                 
                 {/* Themed placeholder for image */}
                 <div className={`w-full h-64 bg-gradient-to-br ${event.bgGradient} rounded-lg flex items-center justify-center border-2 border-white/30 dark:border-zinc-600/30`}>
