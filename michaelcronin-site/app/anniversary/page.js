@@ -1,454 +1,581 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { timelineEvents, floatingImages, characterQuotes } from '/data/anniversaryData';
 
 export default function Anniversary() {
   const router = useRouter();
-  const [playingAudio, setPlayingAudio] = useState(null);
   const [playingVideo, setPlayingVideo] = useState(null);
-  
-  const timelineEvents = [
-    {
-      date: "January 15, 2024",
-      title: "Our First Date",
-      description: "We met for coffee and talked for hours. I knew there was something special about you.",
-      image: "/anniversary/first-date.jpg",
-      emoji: "☕",
-      theme: "coffee",
-      bgGradient: "from-rose-50 to-pink-100 dark:from-rose-900 dark:to-rose-800",
-      dotColor: "bg-rose-600",
-      titleColor: "text-rose-800 dark:text-rose-200",
-      icons: ["☕", "💬", "✨"]
-    },
-    {
-      date: "March 8, 2024",
-      title: "Pizza Night Tradition Begins",
-      description: "Our first pizza date that started our weekly tradition. You always steal my pepperoni and I love it!",
-      image: "/anniversary/pizza.jpg",
-      emoji: "🍕",
-      theme: "pizza",
-      bgGradient: "from-pink-100 to-rose-200 dark:from-rose-800 dark:to-rose-900",
-      dotColor: "bg-rose-700",
-      titleColor: "text-rose-900 dark:text-rose-100",
-      icons: ["🍕", "🧀", "❤️", "🍕"],
-      whatsappMessages: [
-        {
-          sender: "Michael",
-          message: "Pizza tonight? 🍕",
-          time: "7:32 PM",
-          type: "sent"
-        },
-        {
-          sender: "Yasmin",
-          message: "YES! But I&apos;m stealing all your pepperoni again 😈",
-          time: "7:35 PM",
-          type: "received"
-        },
-        {
-          sender: "Michael",
-          message: "I wouldn&apos;t have it any other way ❤️",
-          time: "7:36 PM",
-          type: "sent"
-        }
-      ]
-    },
-    {
-      date: "April 22, 2024",
-      title: "Bravest Warriors Marathon",
-      description: "We discovered our shared love for Bravest Warriors! Catbug became our spirit animal and we&apos;ve been quoting it ever since.",
-      image: "/anniversary/bravest-warriors.jpg",
-      emoji: "🐛",
-      theme: "bravest-warriors",
-      bgGradient: "from-rose-100 to-pink-200 dark:from-rose-900 dark:to-pink-900",
-      dotColor: "bg-rose-800",
-      titleColor: "text-rose-800 dark:text-rose-200",
-      icons: ["🐛", "🌟", "🚀", "💫"]
-    },
-    {
-      date: "June 15, 2024",
-      title: "First DJO Concert",
-      description: "Our first concert together seeing DJO! Dancing badly and singing along to all the songs. Perfect night.",
-      image: "/anniversary/djo.jpg",
-      emoji: "🎵",
-      theme: "djo",
-      bgGradient: "from-pink-50 to-rose-100 dark:from-rose-950 dark:to-rose-800",
-      dotColor: "bg-rose-600",
-      titleColor: "text-rose-800 dark:text-rose-200",
-      icons: ["🎵", "🎤", "🕺", "💃"],
-      voiceMessage: {
-        url: "/anniversary/voice/djo-concert.mp3",
-        duration: "0:45",
-        transcript: "Oh my god Michael, this concert is AMAZING! I love you so much!"
-      },
-      video: {
-        url: "/anniversary/videos/djo-dancing.mp4",
-        thumbnail: "/anniversary/thumbnails/djo-dancing.jpg",
-        duration: "1:23",
-        title: "Us dancing badly at DJO 😂"
-      }
-    },
-    {
-      date: "August 20, 2024",
-      title: "Made It Official",
-      description: "The day we became official. Best decision I ever made. You said yes and my heart exploded!",
-      image: "/anniversary/official.jpg",
-      emoji: "💍",
-      theme: "official",
-      bgGradient: "from-rose-200 to-pink-300 dark:from-rose-900 dark:to-rose-950",
-      dotColor: "bg-rose-800",
-      titleColor: "text-rose-900 dark:text-rose-100",
-      icons: ["💍", "💕", "🥰", "✨"]
-    },
-    {
-      date: "October 31, 2024",
-      title: "Halloween Shenanigans",
-      description: "Our first Halloween together! You looked incredible in your costume and we ate way too much candy.",
-      image: "/anniversary/halloween.jpg",
-      emoji: "🎃",
-      theme: "halloween",
-      bgGradient: "from-rose-100 to-pink-100 dark:from-rose-800 dark:to-rose-900",
-      dotColor: "bg-rose-700",
-      titleColor: "text-rose-800 dark:text-rose-200",
-      icons: ["🎃", "👻", "🍭", "🧙‍♀️"]
-    },
-    {
-      date: "December 25, 2024",
-      title: "First Christmas Together",
-      description: "Our first Christmas as a couple. The most wonderful time of the year became even better with you.",
-      image: "/anniversary/christmas.jpg",
-      emoji: "🎄",
-      theme: "christmas",
-      bgGradient: "from-pink-100 to-rose-200 dark:from-rose-900 dark:to-rose-800",
-      dotColor: "bg-rose-600",
-      titleColor: "text-rose-800 dark:text-rose-200",
-      icons: ["🎄", "🎁", "❄️", "⭐"]
-    },
-    {
-      date: "January 15, 2025",
-      title: "One Year Anniversary",
-      description: "365 days of love, laughter, and endless joy. Here&apos;s to forever with you, Yasmin. ❤️",
-      image: "/anniversary/one-year.jpg",
-      emoji: "🥂",
-      theme: "anniversary",
-      bgGradient: "from-rose-100 to-pink-200 dark:from-rose-900 dark:to-pink-900",
-      dotColor: "bg-rose-800",
-      titleColor: "text-rose-900 dark:text-rose-100",
-      icons: ["🥂", "💖", "🌟", "♾️"]
-    }
-  ];
+  const [daysCounter, setDaysCounter] = useState(0);
+  const floatingRefs = useRef([]);
+  const [showSpaceship, setShowSpaceship] = useState(true);
 
-  // WhatsApp Message Component - Grand Budapest style
-  const WhatsAppMessage = ({ message, type, sender, time }) => (
-    <div className={`flex ${type === 'sent' ? 'justify-end' : 'justify-start'} mb-3`}>
-      <div className={`max-w-sm px-4 py-3 border-2 shadow-md ${
-        type === 'sent' 
-          ? 'bg-rose-600 dark:bg-rose-700 text-rose-100 border-rose-700 dark:border-rose-600 rounded-sm rounded-br-none' 
-          : 'bg-rose-50 dark:bg-rose-800 text-rose-800 dark:text-rose-200 border-rose-300 dark:border-rose-600 rounded-sm rounded-bl-none'
-      }`}>
-        <p className="text-sm font-medium leading-relaxed">{message}</p>
-        <p className={`text-xs mt-2 font-medium tracking-wide ${
-          type === 'sent' ? 'text-rose-200' : 'text-rose-600 dark:text-rose-400'
-        }`}>
-          {time}
+  // Audio setup - move this INSIDE useEffect
+  // Audio setup - start music with spaceship
+useEffect(() => {
+  // Create audio element
+  const backgroundMusic = new Audio('/audio/themesong.mp3');
+  backgroundMusic.loop = true;
+  backgroundMusic.volume = 0.3;
+
+  // Function to play music
+  function playBackgroundMusic() {
+    backgroundMusic.play()
+      .then(() => console.log('Audio started with spaceship'))
+      .catch(error => console.log('Play error:', error));
+  }
+
+  // Start music immediately when component mounts (with spaceship)
+  // Most browsers will allow this if user has interacted with the page before
+  playBackgroundMusic();
+
+  // Fallback: if auto-play fails, wait for user interaction
+  function startAudioOnClick() {
+    playBackgroundMusic();
+    document.removeEventListener('click', startAudioOnClick);
+  }
+
+  // Add click listener as backup
+  document.addEventListener('click', startAudioOnClick);
+
+  // Cleanup function
+  return () => {
+    document.removeEventListener('click', startAudioOnClick);
+    backgroundMusic.pause();
+  };
+}, []); // Runs once when component mounts (same time as spaceship appears)
+
+  // Rest of your useEffect hooks...
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSpaceship(false);
+    }, 20000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Days counter
+  useEffect(() => {
+    const startDate = new Date("2024-08-27");
+    const updateCounter = () => {
+      const now = new Date();
+      const diffTime = Math.abs(now - startDate);
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      setDaysCounter(diffDays);
+    };
+    updateCounter();
+    const interval = setInterval(updateCounter, 1000 * 60 * 60);
+    return () => clearInterval(interval);
+  }, []);
+
+// Add this state at the top of your component (with other useState declarations)
+const [initialPositions, setInitialPositions] = useState([]);
+
+// Add this useEffect BEFORE your floating animations useEffect
+useEffect(() => {
+  if (typeof window !== 'undefined') {
+    const positions = floatingImages.map(() => ({
+      x: Math.random() * (window.innerWidth - 240) + 120,
+      y: Math.random() * (window.innerHeight - 240) + 120
+    }));
+    setInitialPositions(positions);
+  }
+}, [floatingImages]);
+
+// Update your existing floating animations useEffect
+useEffect(() => {
+  // Don't start animations until positions are set
+  if (initialPositions.length === 0) return;
+
+  // Generate floating elements based on floatingImages array length
+  const floatingElements = floatingImages.map((_, index) => {
+    // Generate varied properties for each element
+    const speedVariations = [1.2, 1.5, 0.8, 2.0, 1.0, 1.8, 1.3];
+    const rangeVariations = [20, 15, 25, 18, 22, 20, 18];
+    const directionVariations = [
+      { x: 1, y: 1 }, { x: -1, y: 1 }, { x: 1, y: -1 }, { x: -1, y: -1 },
+      { x: 1, y: 1 }, { x: -1, y: 1 }, { x: 1, y: -1 }
+    ];
+    const rotationSpeedVariations = [0.8, -1.2, 1.5, -0.5, 1.0, -1.5, 0.7];
+    
+    return {
+      ref: index,
+      speed: speedVariations[index % speedVariations.length],
+      range: rangeVariations[index % rangeVariations.length],
+      direction: directionVariations[index % directionVariations.length],
+      rotation: 0,
+      rotationSpeed: rotationSpeedVariations[index % rotationSpeedVariations.length]
+    };
+  });
+
+  const intervals = floatingElements.map((element, index) => {
+    let directionX = element.direction.x;
+    let directionY = element.direction.y;
+    
+    return setInterval(() => {
+      if (floatingRefs.current[index]) {
+        // Use random initial positions instead of calculated ones
+        const currentX = parseFloat(floatingRefs.current[index].style.left) || initialPositions[index]?.x || (index * 300 + 100);
+        const currentY = parseFloat(floatingRefs.current[index].style.top) || initialPositions[index]?.y || (index * 200 + 150);
+        
+        const newX = currentX + directionX * element.speed;
+        const newY = currentY + directionY * element.speed;
+        
+        // Update rotation
+        element.rotation += element.rotationSpeed;
+        
+        // Bounce off screen edges with some padding
+        const padding = 120;
+        if (newX > window.innerWidth - padding || newX < padding) {
+          directionX *= -1;
+          element.rotationSpeed *= -1;
+        }
+        if (newY > window.innerHeight - padding || newY < padding) {
+          directionY *= -1;
+          element.rotationSpeed *= -1;
+        }
+        
+        const finalX = Math.max(padding, Math.min(window.innerWidth - padding, newX));
+        const finalY = Math.max(padding, Math.min(window.innerHeight - padding, newY));
+        
+        floatingRefs.current[index].style.left = finalX + "px";
+        floatingRefs.current[index].style.top = finalY + "px";
+        floatingRefs.current[index].style.transform = `rotate(${element.rotation}deg) scale(${0.8 + Math.sin(element.rotation * 0.01) * 0.2})`;
+      }
+    }, 50);
+  });
+
+  return () => intervals.forEach(clearInterval);
+}, [floatingImages, initialPositions]); // Add initialPositions as dependency
+
+// Update your FloatingCharacter component
+const FloatingCharacter = ({ image, index, characterData }) => {
+  const initialPos = initialPositions[index];
+  
+  return (
+    <div
+      ref={el => {
+        if (el && initialPos) {
+          el.style.left = initialPos.x + "px";
+          el.style.top = initialPos.y + "px";
+        }
+        floatingRefs.current[index] = el;
+      }}
+      style={{ 
+        position: "fixed", 
+        zIndex: 5,
+        transition: "none"
+      }}
+      className="floating-character relative"
+    >
+      <Image
+        src={image}
+        alt={`Floating character ${index + 1}`}
+        width={100}
+        height={100}
+        className="drop-shadow-[0_0_20px_rgba(0,255,255,0.6)] opacity-80"
+      />
+    </div>
+  );
+};
+
+  // Quote Bubble Component
+  const QuoteBubble = ({ quote, isVisible, position = "right" }) => (
+    <div 
+      className={`
+        absolute transition-all duration-300 transform pointer-events-none z-20
+        ${position === "right" ? "-right-4 top-0" : "-left-4 top-0"}
+        ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-75"}
+      `}
+      style={{
+        transform: `translate(${position === "right" ? "100%" : "-100%"}, -20px) scale(${isVisible ? 1 : 0.75})`
+      }}
+    >
+      {/* Quote bubble */}
+      <div 
+        className={`
+          relative bg-gradient-to-r from-purple-900/95 to-pink-900/95 
+          backdrop-blur-sm border-2 border-purple-400/70 rounded-xl 
+          px-3 py-2 max-w-48 text-center
+        `}
+        style={{
+          boxShadow: '0 0 25px rgba(128, 0, 255, 0.6), inset 0 0 15px rgba(128, 0, 255, 0.3)'
+        }}
+      >
+        {/* Quote text */}
+        <p 
+          className="pixel-font text-white text-xs font-bold leading-tight"
+          style={{
+            textShadow: '0 0 10px rgba(128, 0, 255, 0.9)'
+          }}
+        >
+          {quote}
         </p>
+        
+        {/* Speech bubble tail */}
+        <div 
+          className={`
+            absolute top-1/2 w-0 h-0 border-t-8 border-b-8 border-transparent
+            ${position === "right" 
+              ? "-left-2 border-r-8 border-r-purple-400/70" 
+              : "-right-2 border-l-8 border-l-purple-400/70"
+            }
+          `}
+          style={{ transform: "translateY(-50%)" }}
+        ></div>
+        
+        {/* Glowing dots */}
+        <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-pink-400 opacity-60 animate-pulse"></div>
+        <div className="absolute -bottom-1 -left-1 w-1.5 h-1.5 rounded-full bg-purple-400 opacity-40 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
       </div>
     </div>
   );
 
-  // Voice Message Component
-  const VoiceMessage = ({ voiceMessage, eventIndex }) => {
-    const isPlaying = playingAudio === eventIndex;
-    
-    return (
-      <div className="bg-white/50 dark:bg-zinc-800/50 rounded-lg p-4 border border-gray-200 dark:border-zinc-600">
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={() => setPlayingAudio(isPlaying ? null : eventIndex)}
-            className="w-10 h-10 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white transition"
-          >
-            {isPlaying ? '⏸️' : '▶️'}
-          </button>
-          <div className="flex-1">
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-sm font-medium">Voice Message</span>
-              <span className="text-xs text-gray-500">{voiceMessage.duration}</span>
-            </div>
-            <div className="w-full bg-gray-200 dark:bg-zinc-600 rounded-full h-2">
-              <div className={`bg-green-500 h-2 rounded-full transition-all duration-300 ${
-                isPlaying ? 'w-full' : 'w-0'
-              }`}></div>
-            </div>
-          </div>
+  
+
+  // Updated WhatsApp Message Component with title styling
+  const WhatsAppMessage = ({ message, type, time, sender }) => (
+    <div className={`flex ${type === "sent" ? "justify-end" : "justify-start"} mb-4`}>
+      <div className={`max-w-sm px-4 py-3 rounded-lg ${type === "sent" ? "bg-orange-500 bg-opacity-80" : "bg-blue-500 bg-opacity-80"} relative`}>
+        {/* Message text with pixel font styling like titles */}
+        <p className="pixel-font text-white text-lg font-bold leading-relaxed mb-2">
+          {message}
+        </p>
+        {/* Sender and time info */}
+        <div className="flex justify-between items-center text-xs">
+          {sender && <span className="text-green-100 pixel-font font-semibold">{sender}</span>}
+          <span className="text-green-100 opacity-75">{time}</span>
         </div>
-        {voiceMessage.transcript && (
-          <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 italic">
-            &ldquo;{voiceMessage.transcript}&rdquo;
-          </p>
+      </div>
+    </div>
+  );
+
+  const VideoPlayer = ({ video, eventIndex }) => {
+    const isPlaying = playingVideo === eventIndex;
+    const videoRef = useRef(null);
+    return (
+      <div className="mb-4">
+        {isPlaying ? (
+          <video
+            ref={videoRef}
+            controls
+            autoPlay
+            className="w-full max-w-md rounded-lg"
+            onEnded={() => setPlayingVideo(null)}
+          >
+            <source src={video.url} type="video/mp4" />
+          </video>
+        ) : (
+          <div className="relative">
+            <div className="w-full max-w-md h-48 bg-gray-800 rounded-lg flex items-center justify-center">
+              <div className="text-center text-white">
+                <div className="text-4xl mb-2">🎥</div>
+                <p className="text-sm mb-1">{video.title}</p>
+                <p className="text-xs">{video.duration}</p>
+              </div>
+            </div>
+            <button
+              onClick={() => setPlayingVideo(eventIndex)}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <div className="w-16 h-16 bg-white bg-opacity-80 rounded-full flex items-center justify-center">
+                <span className="text-2xl">▶️</span>
+              </div>
+            </button>
+          </div>
         )}
       </div>
     );
   };
 
-  // Video Player Component
-  const VideoPlayer = ({ video, eventIndex }) => {
-    const isPlaying = playingVideo === eventIndex;
-    
-    return (
-      <div className="bg-white/50 dark:bg-zinc-800/50 rounded-lg overflow-hidden border border-gray-200 dark:border-zinc-600">
-        <div className="relative">
-          <div className="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-zinc-700 dark:to-zinc-600 flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-4xl mb-2">🎥</div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Video: {video.title}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-500">{video.duration}</p>
-            </div>
-          </div>
-          <button
-            onClick={() => setPlayingVideo(isPlaying ? null : eventIndex)}
-            className="absolute inset-0 bg-black/20 hover:bg-black/30 transition flex items-center justify-center"
-          >
-            <div className="w-16 h-16 bg-white/90 hover:bg-white rounded-full flex items-center justify-center">
-              <span className="text-2xl ml-1">{isPlaying ? '⏸️' : '▶️'}</span>
-            </div>
-          </button>
-        </div>
-        <div className="p-3">
-          <p className="text-sm font-medium">{video.title}</p>
-        </div>
-      </div>
-    );
-  };
-
   return (
-    <main className="min-h-screen bg-gradient-to-b from-pink-100 via-rose-100 to-pink-200 dark:from-rose-950 dark:via-pink-900 dark:to-rose-950 text-rose-900 dark:text-rose-100 font-serif relative overflow-hidden">
-      
-      {/* Grand Budapest Hotel decorative border */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute inset-4 border-8 border-rose-800/20 dark:border-rose-200/20 rounded-lg"></div>
-        <div className="absolute inset-6 border-4 border-rose-600/30 dark:border-rose-300/30 rounded-lg"></div>
-        <div className="absolute inset-8 border-2 border-rose-400/40 dark:border-rose-400/40 rounded-lg"></div>
-      </div>
+    <main
+      className="min-h-screen text-white relative overflow-hidden"
+      style={{
+        backgroundImage: "url('/anniversary/space-background.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
+    >
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-      {/* Vintage wallpaper pattern overlay */}
-      <div className="fixed inset-0 opacity-5 dark:opacity-10 pointer-events-none" 
-           style={{
-             backgroundImage: `repeating-linear-gradient(
-               45deg,
-               transparent,
-               transparent 10px,
-               rgba(185, 28, 28, 0.1) 10px,
-               rgba(185, 28, 28, 0.1) 20px
-             )`
-           }}>
-      </div>
-      
+       {/* Spaceship Flyby Animation */}
+      {showSpaceship && (
+        <div 
+          className="fixed top-1/4 -right-[48rem] w-[48rem] h-[28rem] z-30 pointer-events-none"
+          style={{
+            animation: 'spaceshipFlyby 6s ease-in-out forwards'
+          }}
+        >
+          <Image
+            src="/anniversary/spacewhale.webp"
+            alt="Space Whale Flying"
+            width={768}
+            height={448}
+            className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(0,255,255,0.9)]"
+            unoptimized={true} // Allow WebP GIF animation
+          />
+        </div>
+      )}
+
+
+      {/* Multiple Floating Characters with Quote Bubbles */}
+      {floatingImages.map((image, index) => (
+        <FloatingCharacter 
+          key={index}
+          image={image}
+          index={index}
+          characterData={characterQuotes[index] || { quote: "Hello there!", character: "Friend" }}
+        />
+      ))}
+
       {/* Header */}
       <div className="relative z-10 text-center py-20 px-6">
         <button
           onClick={() => router.push("/")}
-          className="mb-12 px-6 py-2 bg-rose-800 hover:bg-rose-900 text-rose-100 rounded-sm font-medium tracking-wider text-sm border-2 border-rose-700 shadow-lg transition-all duration-300 hover:shadow-xl"
+          className="retro-button mb-12"
         >
-          ← RETURN TO LOBBY
+          ← Back to Home
         </button>
-        
-        {/* Ornate frame for title */}
-        <div className="relative max-w-4xl mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-b from-rose-200 to-pink-300 dark:from-rose-800 dark:to-rose-900 rounded-lg shadow-2xl border-4 border-rose-800 dark:border-rose-300"></div>
-          <div className="relative bg-gradient-to-b from-pink-50 to-rose-100 dark:from-rose-900 dark:to-rose-800 m-4 rounded-lg p-12 border-2 border-rose-600 dark:border-rose-400 shadow-inner">
-            
-            {/* Decorative elements */}
-            <div className="absolute top-4 left-4 w-6 h-6 border-l-4 border-t-4 border-rose-600 dark:border-rose-300"></div>
-            <div className="absolute top-4 right-4 w-6 h-6 border-r-4 border-t-4 border-rose-600 dark:border-rose-300"></div>
-            <div className="absolute bottom-4 left-4 w-6 h-6 border-l-4 border-b-4 border-rose-600 dark:border-rose-300"></div>
-            <div className="absolute bottom-4 right-4 w-6 h-6 border-r-4 border-b-4 border-rose-600 dark:border-rose-300"></div>
-            
-            <h1 className="text-5xl md:text-7xl font-bold text-rose-800 dark:text-rose-200 mb-6 tracking-wider leading-none">
-              MICHAEL & YASMIN
-            </h1>
-            <div className="w-32 h-1 bg-rose-600 dark:bg-rose-400 mx-auto mb-4"></div>
-            <h2 className="text-xl md:text-2xl text-rose-700 dark:text-rose-300 mb-6 tracking-widest font-medium">
-              OUR FIRST YEAR TOGETHER
-            </h2>
-            <div className="text-lg text-rose-600 dark:text-rose-400 font-medium tracking-wide">
-              JANUARY 15, 2024 - JANUARY 15, 2025
-            </div>
-            
-            {/* Ornate flourish */}
-            <div className="mt-8 text-rose-600 dark:text-rose-400">
-              <div className="text-4xl">♦</div>
-            </div>
-          </div>
+
+        <div className="flex justify-center items-center space-x-4 mb-6 flex-wrap">
+          <Image src="/anniversary/beth.png" width={120} height={120} alt="Michael sprite" className="drop-shadow-[0_0_20px_rgba(0,255,255,0.6)]" />
+          <Image
+            src="/anniversary/title1.png"
+            alt="Yasmin and Michael Anniversary Title"
+            width={600}
+            height={200}
+            className="mx-auto animate-pulse"
+          />
+          <Image src="/anniversary/chris.png" width={120} height={120} alt="Yasmin sprite" className="drop-shadow-[0_0_20px_rgba(0,255,255,0.6)]" />
         </div>
+
+       <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-4 text-center">
+  {/* Label */}
+    <div className="text-sm md:text-base text-gray-400 italic">
+    Days of adventures
+  </div>
+
+  {/* Counter */}
+  <div className="text-4xl md:text-5xl font-bold neon-text rainbow-text animate-pulse">
+    {daysCounter.toLocaleString()}
+  </div>
+
+  {/* Tagline */}
+  <div className="text-sm md:text-base text-gray-400 italic">
+    and many many more to go!
+  </div>
+</div>
+
       </div>
 
-      {/* Timeline */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 pb-20">
-        <div className="relative">
-          {/* Ornate timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-2 bg-gradient-to-b from-rose-600 via-rose-700 to-rose-800 shadow-lg"></div>
-          <div className="absolute left-7 top-0 bottom-0 w-4 bg-gradient-to-b from-rose-200/50 via-rose-300/50 to-rose-400/50 blur-sm"></div>
-          
-          {timelineEvents.map((event, index) => (
-            <div key={index} className="relative flex items-start mb-20 last:mb-0">
-              {/* Ornate timeline dot */}
-              <div className={`absolute left-5 w-8 h-8 ${event.dotColor} rounded-full border-4 border-rose-100 dark:border-rose-800 shadow-xl z-10`}>
-                <div className="absolute inset-1 bg-rose-50 dark:bg-rose-900 rounded-full border border-rose-300 dark:border-rose-700"></div>
-                <div className="absolute inset-2 bg-gradient-to-br from-rose-200 to-rose-400 dark:from-rose-700 dark:to-rose-900 rounded-full"></div>
-              </div>
-              
-              {/* Content - Grand Budapest Hotel card style */}
-              <div className={`ml-24 bg-gradient-to-br ${event.bgGradient} rounded-sm shadow-2xl border-4 border-rose-800 dark:border-rose-300 relative overflow-hidden`}>
-                
-                {/* Ornate border pattern */}
-                <div className="absolute inset-2 border-2 border-rose-700/40 dark:border-rose-400/40 rounded-sm"></div>
-                <div className="absolute inset-4 border border-rose-600/30 dark:border-rose-500/30 rounded-sm"></div>
-                
-                {/* Content padding */}
-                <div className="relative p-8">
-                
-                  {/* Ornate corner decorations */}
-                  <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-rose-700 dark:border-rose-300"></div>
-                  <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-rose-700 dark:border-rose-300"></div>
-                  <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-rose-700 dark:border-rose-300"></div>
-                  <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-rose-700 dark:border-rose-300"></div>
-
-                  {/* Floating themed icons - Wes Anderson style */}
-                  <div className="absolute -top-3 -right-3 flex space-x-2">
-                    {event.icons.map((icon, idx) => (
-                      <div 
-                        key={idx}
-                        className="w-8 h-8 bg-rose-800 dark:bg-rose-200 rounded-full flex items-center justify-center text-rose-100 dark:text-rose-800 border-2 border-rose-100 dark:border-rose-800 shadow-lg animate-pulse"
-                        style={{ animationDelay: `${idx * 0.5}s` }}
-                      >
-                        <span className="text-sm">{icon}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-rose-800 dark:bg-rose-200 rounded-full flex items-center justify-center mr-4 border-4 border-rose-100 dark:border-rose-800 shadow-xl">
-                      <span className="text-2xl text-rose-100 dark:text-rose-800">{event.emoji}</span>
-                    </div>
-                    <div>
-                      <h3 className={`text-2xl font-bold ${event.titleColor} tracking-wider mb-1`}>{event.title}</h3>
-                      <p className="text-sm text-rose-700 dark:text-rose-300 font-medium tracking-wide bg-rose-200/50 dark:bg-rose-800/50 px-3 py-1 rounded-full border border-rose-300 dark:border-rose-700 inline-block">{event.date}</p>
-                    </div>
-                  </div>
-                  
-                  <p className="text-rose-800 dark:text-rose-200 leading-relaxed mb-6 font-medium">
-                    {event.description}
-                  </p>
-                
-                  {/* Multimedia Content */}
-                  <div className="space-y-6 mb-6">
-                    {/* WhatsApp Messages - Grand Budapest style */}
-                    {event.whatsappMessages && (
-                      <div className="bg-gradient-to-br from-rose-50 to-pink-100 dark:from-rose-900/50 dark:to-pink-900/50 rounded-sm p-6 border-2 border-rose-600 dark:border-rose-400 shadow-lg">
-                        <div className="flex items-center mb-4">
-                          <div className="w-8 h-8 bg-rose-600 dark:bg-rose-400 rounded-full flex items-center justify-center mr-3">
-                            <span className="text-white dark:text-rose-900 text-sm">💬</span>
-                          </div>
-                          <span className="font-bold text-rose-800 dark:text-rose-200 tracking-wide">PRIVATE CORRESPONDENCE</span>
-                        </div>
-                        {event.whatsappMessages.map((msg, idx) => (
-                          <WhatsAppMessage 
-                            key={idx}
-                            message={msg.message}
-                            type={msg.type}
-                            sender={msg.sender}
-                            time={msg.time}
-                          />
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Voice Message */}
-                    {event.voiceMessage && (
-                      <VoiceMessage voiceMessage={event.voiceMessage} eventIndex={index} />
-                    )}
-
-                    {/* Video */}
-                    {event.video && (
-                      <VideoPlayer video={event.video} eventIndex={index} />
-                    )}
-                  </div>
-                  
-                  {/* Ornate photo placeholder */}
-                  <div className={`w-full h-80 bg-gradient-to-br ${event.bgGradient} rounded-sm border-4 border-rose-700 dark:border-rose-300 shadow-xl relative overflow-hidden`}>
-                    <div className="absolute inset-2 border-2 border-rose-600/50 dark:border-rose-400/50 rounded-sm"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center bg-rose-50/80 dark:bg-rose-900/80 p-8 rounded-sm border border-rose-300 dark:border-rose-600 backdrop-blur-sm">
-                        <div className="flex justify-center space-x-3 mb-4">
-                          {event.icons.map((icon, idx) => (
-                            <div key={idx} className="w-12 h-12 bg-rose-800 dark:bg-rose-200 rounded-full flex items-center justify-center">
-                              <span className="text-xl text-rose-100 dark:text-rose-800">{icon}</span>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="text-6xl mb-4 text-rose-800 dark:text-rose-200">{event.emoji}</div>
-                        <p className="text-sm text-rose-700 dark:text-rose-300 font-medium tracking-wide">PHOTOGRAPH FORTHCOMING</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Final Love Letter - Grand Budapest Hotel style */}
-      <div className="relative z-10 py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          {/* Ornate letter frame */}
-          <div className="relative bg-gradient-to-b from-rose-100 to-pink-200 dark:from-rose-900 dark:to-rose-800 rounded-sm border-4 border-rose-800 dark:border-rose-300 shadow-2xl">
-            <div className="absolute inset-2 border-2 border-rose-700/50 dark:border-rose-400/50 rounded-sm"></div>
-            <div className="absolute inset-4 border border-rose-600/40 dark:border-rose-500/40 rounded-sm"></div>
-            
-            {/* Letter content */}
-            <div className="relative p-16">
-              {/* Ornate corners */}
-              <div className="absolute top-4 left-4 w-8 h-8 border-l-4 border-t-4 border-rose-700 dark:border-rose-300"></div>
-              <div className="absolute top-4 right-4 w-8 h-8 border-r-4 border-t-4 border-rose-700 dark:border-rose-300"></div>
-              <div className="absolute bottom-4 left-4 w-8 h-8 border-l-4 border-b-4 border-rose-700 dark:border-rose-300"></div>
-              <div className="absolute bottom-4 right-4 w-8 h-8 border-r-4 border-b-4 border-rose-700 dark:border-rose-300"></div>
-              
-              {/* Header */}
-              <div className="text-center mb-12">
-                <div className="text-4xl text-rose-600 dark:text-rose-400 mb-4">♦</div>
-                <h2 className="text-4xl font-bold text-rose-800 dark:text-rose-200 tracking-widest mb-2">
-                  TO MY DEAREST YASMIN
-                </h2>
-                <div className="w-48 h-1 bg-rose-600 dark:bg-rose-400 mx-auto"></div>
-              </div>
-              
-              {/* Letter text */}
-              <div className="bg-rose-50/50 dark:bg-rose-900/30 p-8 rounded-sm border border-rose-300 dark:border-rose-600 shadow-inner">
-                <p className="text-lg text-rose-800 dark:text-rose-200 leading-relaxed font-medium text-center italic mb-8">
-                  &ldquo;This past year has been the most extraordinary year of my life, and it&apos;s all because of you. 
-                  Every day with you feels like a new adventure, filled with love, laughter, and endless joy. 
-                  You make everything brighter, and I can&apos;t wait to create countless more memories together. 
-                  Happy anniversary, my love. Here&apos;s to forever with you.&rdquo;
-                </p>
-                
-                {/* Signature */}
-                <div className="text-center">
-                  <div className="text-3xl text-rose-600 dark:text-rose-400 mb-4">💕</div>
-                  <p className="text-rose-700 dark:text-rose-300 font-bold tracking-wide text-lg">
-                    WITH ALL MY LOVE,
-                  </p>
-                  <p className="text-rose-800 dark:text-rose-200 font-bold tracking-wider text-2xl mt-2">
-                    MICHAEL
-                  </p>
-                  <div className="w-24 h-0.5 bg-rose-600 dark:bg-rose-400 mx-auto mt-4"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+{/* Timeline */}
+<div className="relative z-10 max-w-5xl mx-auto px-16 pb-20">
+  <div className="space-y-24">
+    {timelineEvents.map((event, index) => {
+      // Array of character configurations with individual positioning
+      const characterConfigs = [
+        {
+          image: "/anniversary/bearhand1.png",
+          width: 200,
+          height: 200,
+          containerClasses: "absolute -left-32 -top-4 w-80 h-80 z-0 flex items-center justify-end"
+        },
+        {
+          image: "/anniversary/catbughand.png", 
+          width: 140,
+          height: 180,
+          containerClasses: "absolute -left-14 top-0 w-44 h-44 z-0 flex items-center justify-center"
+        },
+        {
+          image: "/anniversary/concierge.png",
+          width: 200,
+          height: 200,
+          containerClasses: "absolute -left-32 -top-4 w-50 h-50 z-0 flex items-end justify-end"
+        },
+        {
+          image: "/anniversary/robochris.png",
+          width: 150,
+          height: 170,
+          containerClasses: "absolute -left-24 top-1 w-55 h-55 z-0 flex items-start justify-end"
+        },
+      ];
       
+      // Get the appropriate character config for this event (cycles through the array)
+      const currentCharacterConfig = characterConfigs[index % characterConfigs.length];
+      
+      return (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative flex flex-col md:flex-row items-start"
+        >
+          {/* Character PNG - positioned individually for each character */}
+          <div className={currentCharacterConfig.containerClasses}>
+            <Image 
+              src={currentCharacterConfig.image}
+              alt={`Character ${(index % characterConfigs.length) + 1}`}
+              width={currentCharacterConfig.width}
+              height={currentCharacterConfig.height}
+              className="w-full h-full object-contain"
+              style={{
+                // filter: 'drop-shadow(0 0 10px rgba(0, 255, 255, 0.5))'
+              }}
+            />
+          </div>
+
+          {/* Event card with stick border */}
+          <div className="ml-24 relative flex-1 max-w-2xl">
+            {/* Stick border container */}
+            <div className="absolute inset-0 pointer-events-none z-10">
+              {/* Top border */}
+              <div 
+                className="absolute top-0 left-0 right-0 h-12"
+                style={{
+                  backgroundImage: "url('/anniversary/stickX.png')",
+                  backgroundRepeat: "repeat-x",
+                  backgroundSize: "auto 100%",
+                  filter: 'drop-shadow(2px 2px 4px rgba(139, 69, 19, 0.6))',
+                }}
+              />
+              
+              {/* Bottom border */}
+              <div 
+                className="absolute bottom-0 left-0 right-0 h-12"
+                style={{
+                  backgroundImage: "url('/anniversary/stickX.png')",
+                  backgroundRepeat: "repeat-x",
+                  backgroundSize: "auto 100%",
+                  filter: 'drop-shadow(2px 2px 4px rgba(139, 69, 19, 0.6))',
+                }}
+              />
+              
+              {/* Left border */}
+              <div 
+                className="absolute top-0 bottom-0 left-0 w-12"
+                style={{
+                  backgroundImage: "url('/anniversary/stickY.png')",
+                  backgroundRepeat: "repeat-y",
+                  backgroundSize: "100% auto",
+                  filter: 'drop-shadow(2px 2px 4px rgba(139, 69, 19, 0.6))',
+                }}
+              />
+              
+              {/* Right border */}
+              <div 
+                className="absolute top-0 bottom-0 right-0 w-12"
+                style={{
+                  backgroundImage: "url('/anniversary/stickY.png')",
+                  backgroundRepeat: "repeat-y",
+                  backgroundSize: "100% auto",
+                  filter: 'drop-shadow(2px 2px 4px rgba(139, 69, 19, 0.6))',
+                }}
+              />
+            </div>
+
+            {/* Card content with padding to account for stick border */}
+            <div className="bg-black bg-opacity-70 rounded-lg p-6 m-6 relative z-0">
+              <h3 className="text-xl font-bold pixel-font ">{event.title}</h3>
+              <p className="text-sm text-gray-300 mb-2">{event.date}</p>
+              <p className="mb-4 accent-font">{event.description}</p>
+
+              {/* WhatsApp messages with updated styling */}
+              {event.whatsappMessages && (
+                <div>
+                  {event.whatsappMessages.map((msg, i) => (
+                    <WhatsAppMessage key={i} {...msg} />
+                  ))}
+                </div>
+              )}
+
+              {/* Event images */}
+              {event.images && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                  {event.images.map((img, idx) => (
+                    <Image
+                      key={idx}
+                      src={img}
+                      alt={`${event.title} - ${idx + 1}`}
+                      className="w-full rounded-lg"
+                      width={300}
+                      height={200}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* Single event image */}
+              {event.image && (
+                <div className="mb-4">
+                  <Image
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full rounded-lg"
+                    width={600}
+                    height={400}
+                  />
+                </div>
+              )}
+
+              {/* Video player */}
+              {event.video && <VideoPlayer video={event.video} eventIndex={index} />}
+            </div>
+          </div>
+        </motion.div>
+      );
+    })}
+  </div>
+</div>
+
+      {/* Love Letter */}
+      {/* <div className="relative z-10 py-20 px-6">
+        <div className="max-w-2xl mx-auto bg-black bg-opacity-80 rounded-lg p-12 text-center neon-border">
+          <h2 className="text-3xl font-bold mb-8 pixel-font neon-text">
+            To My Dearest Yasmin
+          </h2>
+          <p className="text-lg leading-relaxed mb-8 italic accent-font">
+            &ldquo;This past year has been the most extraordinary year of my life...&rdquo;
+          </p>
+          <div className="text-center">
+            <div className="text-2xl mb-4">💕</div>
+            <p className="font-bold pixel-font">With all my love,</p>
+            <p className="text-xl font-bold mt-2 pixel-font neon-text">Michael</p>
+          </div>
+        </div>
+      </div> */}
+
+      {/* Footer */}
+      {/* <footer className="relative z-10 text-center py-6 text-xs text-gray-400">
+        Made with 💖 by Michael | 2025
+      </footer> */}
     </main>
   );
 }
+
+
+
+  // const timelineEvents = [
+  //   { date: "June 6, 2024", title: "When We First Met", description: "Dell. I was so nervous around you but it was also so easy to find things to talk to you about.", images: ["/anniversary/PXL_20240626_102055755.MP.jpg", "/anniversary/IMG-20240722-WA0006.jpg"], emoji: "💕" },
+  //   { date: "June 21, 2024", title: "First Text", description: "\"Good Luck with your Results\" you said to me. The beginning of everything.", emoji: "💬", whatsappMessages: [{ sender: "Yasmin", message: "Good Luck with your Results", time: "June 21", type: "received" }] },
+  //   { date: "July 2024", title: "Bravest Warriors", description: "I watched it on your suggestion. I adored it like I adored you.", emoji: "🐛" },
+  //   { date: "August 8, 2024", title: "Something You Wrote", description: "You sent me something beautiful you had written. 'Are you ever aware of time slipping so quickly?...'", emoji: "✍️" },
+  //   { date: "August 13, 2024", title: "Illegal Territory", description: "\"your staring contests are illegal territory\"", emoji: "👀", whatsappMessages: [{ sender: "Yasmin", message: "your staring contests are illegal territory", time: "August 13", type: "received" }] },
+  //   { date: "August 26, 2024", title: "Night Night Voice Messages", description: "We sent night night voice messages. These are my favourite things in the world.", emoji: "🎙️" },
+  //   { date: "September 26, 2024", title: "You Sang to Me", description: "You sent a voice message of you singing. My heart melted.", emoji: "🎵" },
+  //   { date: "September 2024", title: "Pride & Pizza Date", description: "Pride Parade, Pizza Date - adventure together.", emoji: "🏳️‍🌈" },
+  //   { date: "September 2024", title: "I Luv You", description: "\"I luv you\" message sent by me. The first time I said those words.", emoji: "💖", whatsappMessages: [{ sender: "Michael", message: "I luv you", time: "September 2024", type: "sent" }] },
+  //   { date: "September 2024", title: "Pulp Fiction Cinema Date", description: "Our cinema date watching Pulp Fiction together.", emoji: "🎬" },
+  //   { date: "September 27, 2024", title: "Milanos Date", description: "Our special date at Milanos.", emoji: "🍽️" },
+  //   { date: "October 2024", title: "Crescent Carpark Nights", description: "Making out till late in the Crescent Carpark.", emoji: "🌙" },
+  //   { date: "October 2024", title: "Trip to Leeds - Alfie Templeman", description: "Our trip to Leeds for Alfie Templeman and the Infinity Song.", image: "/anniversary/PXL_20241115_134646343.jpg", emoji: "🎵" },
+  //   { date: "November 2024", title: "New Girl Marathon", description: "Binge watching New Girl together.", emoji: "📺" },
+  //   { date: "November 2024", title: "Airbnb Cabin in the Woods", description: "Our magical getaway in the cabin in the woods.", image: "/anniversary/PXL_20250215_225347520.MP.jpg", emoji: "🏕️", video: { url: "/anniversary/VID-20250225-WA0001.mp4", duration: "4:13", title: "Our cabin in the woods getaway" } },
+  //   { date: "December 2024", title: "London Concert - Djo", description: "Our London concert seeing DJO.", emoji: "🎤" },
+  //   { date: "December 2024", title: "Kilkenny Trip", description: "Our beautiful trip to Kilkenny together.", emoji: "🏰" }
+  // ];
