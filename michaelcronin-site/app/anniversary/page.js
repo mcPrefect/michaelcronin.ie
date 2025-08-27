@@ -392,8 +392,8 @@ const FloatingCharacter = ({ image, index, characterData }) => {
         },
         {
           image: "/anniversary/concierge.png",
-          width: 200,
-          height: 200,
+          width: 180,
+          height: 180,
           containerClasses: "absolute -left-32 -top-4 w-50 h-50 z-0 flex items-end justify-end"
         },
         {
