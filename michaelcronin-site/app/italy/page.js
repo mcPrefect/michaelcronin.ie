@@ -28,6 +28,14 @@ export default function ItalyGallery() {
         className="relative text-white px-6 py-20 text-center overflow-hidden"
         style={{ backgroundColor: "#a83220" }}
       >
+        {/* Painting background */}
+        <div
+          className="absolute inset-0 bg-center bg-cover"
+          style={{
+            backgroundImage: "url('/italy/Harvest.jpg')",
+            opacity: 0.2,
+          }}
+        />
         {/* Top decorative rule */}
         <div className="absolute inset-x-0 top-5 flex items-center px-10 pointer-events-none">
           <div className="flex-1" style={{ borderTop: "1px solid rgba(255,255,255,0.25)" }} />
@@ -169,12 +177,12 @@ export default function ItalyGallery() {
         className="text-center py-10"
         style={{ borderTop: "1px solid #e5d8c8" }}
       >
-        <p
+        {/* <p
           className="font-handwritten text-lg mb-3"
           style={{ color: "#a83220" }}
         >
           {italyPhotos.length} photos · {tripInfo.dates}
-        </p>
+        </p> */}
         <Link
           href="/"
           className="text-[11px] tracking-[0.25em] uppercase transition-opacity duration-200 hover:opacity-50"
@@ -182,6 +190,12 @@ export default function ItalyGallery() {
         >
           ← michaelcronin.ie
         </Link>
+        <p className="text-xs mt-4" style={{ color: "#b5a090" }}>
+          Header artwork: <em>Harvest in Tuscany</em> — Angiolo Tommasi (1858–1923)
+        </p>
+        <p className="text-xs mt-1" style={{ color: "#b5a090" }}>
+          Built with a little help from AI
+        </p>
       </div>
 
       {/* ── LIGHTBOX ──────────────────────────────────────── */}

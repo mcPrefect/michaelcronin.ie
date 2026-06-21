@@ -318,7 +318,9 @@ export default function Home() {
         </div>
       </section>
 
-  
+      <p className="text-center text-xs text-gray-400 dark:text-gray-600 pb-6">
+        Built with a little help from AI
+      </p>
 
      {/* Enhanced Password Modal */}
 {showPasswordModal && (

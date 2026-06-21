@@ -2,7 +2,7 @@ export const tripInfo = {
   title: "ITALIA",
   // subtitle: "2 weeks of Bliss",
   dates: "June 2026",
-  description: "A two-week trip to Tuscany, Italy",
+  description: "Our two-week trip to Tuscany",
   locations: ["Firenze", "Monti del Chianti", "Pisa"],
 };
 
