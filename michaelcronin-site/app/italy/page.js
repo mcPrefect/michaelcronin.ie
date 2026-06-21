@@ -66,7 +66,7 @@ export default function ItalyGallery() {
           {tripInfo.dates}
         </p>
 
-        <p className="text-white/75 max-w-lg mx-auto text-base leading-relaxed mb-10">
+        <p className="text-white/75 max-w-lg mx-auto text-base leading-relaxed">
           {tripInfo.description}
         </p>
 
