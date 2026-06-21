@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { italyPhotos, tripInfo } from "../../data/italyPhotos";
@@ -125,12 +126,13 @@ export default function ItalyGallery() {
                   style={{ borderRadius: "3px" }}
                   onClick={() => setLightboxIndex(globalIndex)}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={photo.src}
                     alt={photo.caption || "Italy"}
+                    width={1200}
+                    height={800}
                     className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                    style={{ display: "block" }}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
 
                   {/* Hover overlay */}
