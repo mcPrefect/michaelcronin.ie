@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -43,7 +45,6 @@ body {
   animation: scroll 40s linear infinite;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
 
 .pixel-font {
   font-family: 'Press Start 2P', cursive;
