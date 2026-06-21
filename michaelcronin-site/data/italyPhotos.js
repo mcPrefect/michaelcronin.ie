@@ -2,8 +2,8 @@ export const tripInfo = {
   title: "ITALIA",
   // subtitle: "2 weeks of Bliss",
   dates: "June 2026",
-  description: "2 weeks of bliss in Italy, exploring the history, architecture, and food.",
-  locations: ["Pisa", "Tuscany", "Chianti"],
+  description: "A two-week trip to Tuscany, Italy",
+  locations: ["Firenze", "Monti del Chianti", "Pisa"],
 };
 
 // To add more photos:
@@ -11,33 +11,93 @@ export const tripInfo = {
 // 2. Add a new entry to this array below
 export const italyPhotos = [
   {
-    src: "/italy/DSC00840.jpg",
-    caption: "The Colosseum",
-    location: "Rome",
+    src: "/italy/italy001.jpg",
+    caption: "Duomo Painter",
+    location: "Firenze",
   },
   {
-    src: "/italy/DSC00973.jpg",
-    caption: "Trevi Fountain",
-    location: "Rome",
+    src: "/italy/italy002.jpg",
+    caption: "The Duomo",
+    location: "Firenze",
   },
   {
-    src: "/italy/DSC01107.jpg",
-    caption: "Ponte Vecchio",
-    location: "Florence",
+    src: "/italy/italy003.jpg",
+    caption: "People on the Ponte Santa Trinita",
+    location: "Firenze",
   },
   {
-    src: "/italy/DSC01133.jpg",
-    caption: "Uffizi Gallery",
-    location: "Florence",
+    src: "/italy/italy004.jpg",
+    caption: "Museo dell'Opera del Duomo",
+    location: "Firenze",
   },
   {
-    src: "/italy/photo-05.jpg",
-    caption: "Grand Canal",
-    location: "Venice",
+    src: "/italy/italy005.jpg",
+    caption: "Sneaky",
+    location: "Firenze",
   },
   {
-    src: "/italy/photo-06.jpg",
-    caption: "Manarola",
-    location: "Cinque Terre",
+    src: "/italy/italy006.jpg",
+    caption: "Pallazo Pitti Fountain Roof",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy007.jpg",
+    caption: "Sun & Book at Piazzale Michelangelo",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy008.jpg",
+    caption: "Dining by the river",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy009.jpg",
+    caption: "Artist & Art, Gallerai dell'Accademia",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy010.jpg",
+    caption: "Sunset over the Arno",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy011.jpg",
+    caption: "Blue Night",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy012alt.jpg",
+    caption: "Black & Light",
+    location: "Monti del Chianti",
+  },
+  {
+    src: "/italy/italy013alt.jpg",
+    caption: "Morning in Tuscany",
+    location: "Monti del Chianti",
+  },
+  {
+    src: "/italy/italy014.jpg",
+    caption: "Face of Colour",
+    location: "Monti del Chianti",
+  },
+  {
+    src: "/italy/italy015alt.jpg",
+    caption: "Caught behind the lens",
+    location: "Monti del Chianti",
+  },
+  {
+    src: "/italy/italy016.jpg",
+    caption: "Reflection",
+    location: "Monti del Chianti",
+  },
+  {
+    src: "/italy/italy017.jpg",
+    caption: "Our view from the terrace",
+    location: "Monti del Chianti",
+  },
+  {
+    src: "/italy/italy018.jpg",
+    caption: "Nice colour",
+    location: "Pisa",
   },
 ];

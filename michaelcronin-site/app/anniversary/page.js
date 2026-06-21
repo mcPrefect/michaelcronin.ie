@@ -13,6 +13,17 @@ export default function Anniversary() {
   const floatingRefs = useRef([]);
   const [showSpaceship, setShowSpaceship] = useState(true);
 
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.id = 'anniversary-cursors';
+    style.textContent = `
+      body { cursor: url('/cursors/cursor1.png') 16 16, auto !important; }
+      button { cursor: url('/cursors/pointer1.png') 8 8, pointer !important; }
+    `;
+    document.head.appendChild(style);
+    return () => document.getElementById('anniversary-cursors')?.remove();
+  }, []);
+
   // Audio setup - move this INSIDE useEffect
   // Audio setup - start music with spaceship
 useEffect(() => {

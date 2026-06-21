@@ -178,13 +178,6 @@ body {
   100% { opacity: 0.8; transform: scale(1.1); }
 }
 
-body {
-  cursor: url('/cursors/cursor1.png') 16 16, auto; /* 16 16 = hotspot */
-}
-
-button {
-  cursor: url('/cursors/pointer1.png') 8 8, pointer;
-}
 
 @keyframes pulsebutton {
   0%, 100% { transform: scale(1); }
