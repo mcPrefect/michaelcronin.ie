@@ -194,7 +194,7 @@ export default function ItalyGallery() {
           Header artwork: <em>Harvest in Tuscany</em> — Angiolo Tommasi (1858–1923)
         </p>
         <p className="text-xs mt-1" style={{ color: "#b5a090" }}>
-          Built with a little help from AI
+          Developed with AI assistance
         </p>
       </div>
 

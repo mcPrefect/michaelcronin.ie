@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FaGithub, FaLinkedin, FaCameraRetro } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 import DarkModeToggle from "../components/DarkModeToggle";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -291,6 +292,29 @@ export default function Home() {
           slides={images.map((src) => ({ src }))}
           styles={{ container: { backgroundColor: "rgba(0,0,0,0.95)" } }}
         />
+      
+        {/* Glass profile link */}
+        <div className="mt-6 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+          <FaCameraRetro className="text-base" />
+          <span>More of my photography on</span>
+          <a href="https://glass.photo/michaelcronin" target="_blank" className="underline hover:text-gray-800 dark:hover:text-white transition">glass.photo/michaelcronin</a>
+        </div>
+
+        {/* Italy gallery banner */}
+        <Link href="/italy">
+          <div className="mt-8 flex items-center justify-between px-6 py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer" style={{ backgroundColor: "#a83220" }}>
+            <div className="flex items-center gap-4">
+              <span className="text-2xl">🇮🇹</span>
+              <div>
+                <p className="text-white font-semibold text-sm tracking-wide">Italia, June 2026</p>
+                {/* <p className="text-white/60 text-xs">18 photos from Pisa, Tuscany & Chianti</p> */}
+              </div>
+            </div>
+            <span className="text-white/70 text-sm tracking-widest">View Gallery →</span>
+          </div>
+        </Link>
+
+
       </section>
 
 
