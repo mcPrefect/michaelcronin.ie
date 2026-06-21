@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { timelineEvents, floatingImages, characterQuotes } from '/data/anniversaryData';
+import { timelineEvents, floatingImages, characterQuotes } from '../../data/anniversaryData';
 
 export default function Anniversary() {
   const router = useRouter();
