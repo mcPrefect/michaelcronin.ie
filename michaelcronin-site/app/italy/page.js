@@ -72,6 +72,9 @@ export default function ItalyGallery() {
 
       {/* ── MAP ──────────────────────────────────────────── */}
       <div className="px-4 md:px-8 py-12">
+        <p className="text-center font-handwritten text-3xl mb-6" style={{ color: "#a83220" }}>
+          Where we went...
+        </p>
         <div className="relative max-w-4xl mx-auto">
           <div
             className="relative overflow-hidden shadow-lg"

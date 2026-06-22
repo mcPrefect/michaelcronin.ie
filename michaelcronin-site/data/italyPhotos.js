@@ -2,7 +2,7 @@ export const tripInfo = {
   title: "ITALIA",
   // subtitle: "2 weeks of Bliss",
   dates: "June 2026",
-  description: "Our two-week trip to Tuscany",
+  description: "Yasmin & Michael's trip to Tuscany",
   locations: ["Firenze", "Monti del Chianti", "Pisa"],
 };
 
@@ -98,6 +98,81 @@ export const italyPhotos = [
   {
     src: "/italy/italy018.jpg",
     caption: "Nice colour",
+    location: "Pisa",
+  },
+  {
+    src: "/italy/italy019.jpg",
+    caption: "Cathedral of Santa Maria del Fiore",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy020.jpg",
+    caption: "Above Firenze",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy021.jpg",
+    caption: "The Ponte Vecchio",
+    location: "Firenze",
+  },
+  // {
+  //   src: "/italy/italy022.jpg",
+  //   caption: "",
+  //   location: "",
+  // },
+  {
+    src: "/italy/italy023.jpg",
+    caption: "Caffè Gilli",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy024.jpg",
+    caption: "Giardino di Boboli",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy025.jpg",
+    caption: "Stutting in the Uffizi",
+    location: "Firenze",
+  },
+  // {
+  //   src: "/italy/italy026.jpg",
+  //   caption: "",
+  //   location: "",
+  // },
+  {
+    src: "/italy/italy027.jpg",
+    caption: "Baby at the Uffizi",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy028.jpg",
+    caption: "Arno at Sunset",
+    location: "Firenze",
+  },
+  {
+    src: "/italy/italy029.jpg",
+    caption: "Wine Tasting Adventure",
+    location: "Monti del Chianti",
+  },
+  {
+    src: "/italy/italy030.jpg",
+    caption: "Vineyard in the Chianti Hills",
+    location: "Monti del Chianti",
+  },
+  {
+    src: "/italy/italy031.jpg",
+    caption: "Cattedrale di Pisa",
+    location: "Pisa",
+  },
+  {
+    src: "/italy/italy032.jpg",
+    caption: "On top of the Leaning Tower of Pisa",
+    location: "Pisa",
+  },
+  {
+    src: "/italy/italy033.jpg",
+    caption: "The Leaning Tower of Pisa",
     location: "Pisa",
   },
 ];
