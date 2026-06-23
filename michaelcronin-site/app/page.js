@@ -11,6 +11,7 @@ import { logos } from "../data/skills";
 import SkillsStrip from "../components/SkillsStrip";
 // import Tabs from "../components/Tabs";
 import { useRouter } from "next/navigation";
+import BookCarousel from "../components/BookCarousel";
 
 export default function Home() {
   const underConstruction = false;
@@ -299,23 +300,27 @@ export default function Home() {
           <span>More of my photography on</span>
           <a href="https://glass.photo/michaelcronin" target="_blank" className="underline hover:text-gray-800 dark:hover:text-white transition">glass.photo/michaelcronin</a>
         </div>
-
-        {/* Italy gallery banner */}
-        <Link href="/italy">
-          <div className="mt-8 flex items-center justify-between px-6 py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer" style={{ backgroundColor: "#a83220" }}>
-            <div className="flex items-center gap-4">
-              <span className="text-2xl">🇮🇹</span>
-              <div>
-                <p className="text-white font-semibold text-sm tracking-wide">Italia, June 2026</p>
-                {/* <p className="text-white/60 text-xs">18 photos from Pisa, Tuscany & Chianti</p> */}
-              </div>
-            </div>
-            <span className="text-white/70 text-sm tracking-widest">View Gallery →</span>
-          </div>
-        </Link>
-
-
       </section>
+
+      {/* Top fade: homepage → shelf */}
+      <div className="dark:hidden" style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)", height: "80px", background: "linear-gradient(to bottom, #f8f1e7, #120b04)" }} />
+      <div className="hidden dark:block" style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)", height: "80px", background: "linear-gradient(to bottom, #18181b, #120b04)" }} />
+
+      {/* Heading — sits on the dark background */}
+      <div style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)", background: "#120b04", padding: "0 clamp(24px, 5vw, 80px) 32px" }}>
+        <h2 className="font-extrabold tracking-widest" style={{ color: "rgba(245,201,138,0.85)", fontSize: "clamp(1.5rem, 3vw, 2.25rem)", marginBottom: "6px" }}>
+          TRAVELS & TALES
+        </h2>
+        <p style={{ color: "rgba(245,201,138,0.35)", fontSize: "13px", letterSpacing: "0.15em" }}>
+          Scroll through my journeys — click a book to explore
+        </p>
+      </div>
+
+      <BookCarousel />
+
+      {/* Bottom fade: shelf → homepage */}
+      <div className="dark:hidden" style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)", height: "80px", background: "linear-gradient(to bottom, #120b04, #f8f1e7)" }} />
+      <div className="hidden dark:block" style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)", height: "80px", background: "linear-gradient(to bottom, #120b04, #18181b)" }} />
 
 
 
