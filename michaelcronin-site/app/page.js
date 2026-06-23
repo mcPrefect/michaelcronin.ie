@@ -10,16 +10,12 @@ import "yet-another-react-lightbox/styles.css";
 import { logos } from "../data/skills";
 import SkillsStrip from "../components/SkillsStrip";
 // import Tabs from "../components/Tabs";
-import { useRouter } from "next/navigation";
 import BookCarousel from "../components/BookCarousel";
 
 export default function Home() {
-  const underConstruction = false;
+  const underConstruction = true;
   // const [tab, setTab] = useState("about");
   const [open, setOpen] = useState(-1);
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [password, setPassword] = useState("");
-  const router = useRouter();
 
   const images = [
     "/photos/photo-1.jpg",
@@ -29,16 +25,6 @@ export default function Home() {
     "/photos/photo-5.jpg",
     "/photos/photo-6.jpg",
   ];
-
-  const handlePasswordSubmit = (e) => {
-    e.preventDefault();
-    if (password === "270924") {
-      router.push("/anniversary");
-    } else {
-      alert("Incorrect password!");
-      setPassword("");
-    }
-  };
 
   const baseTabStyle =
     "px-4 py-2 border-b-2 font-medium text-wesBrown hover:text-wesTeal hover:border-wesTeal dark:text-wesBrown dark:hover:text-wesTeal";
@@ -61,6 +47,25 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-wesCream dark:bg-zinc-900 text-wesText dark:text-gray-100 font-wes px-6 md:px-20 pt-0 pb-16 transition-colors duration-300">
 
+      {/* Sticky header */}
+      <header
+        className="sticky top-0 z-50 backdrop-blur-sm border-b border-wesBrown/10 dark:border-zinc-700/30 bg-wesCream/90 dark:bg-zinc-900/90"
+        style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)" }}
+      >
+        <nav className="flex items-center justify-between px-6 md:px-20 h-14">
+          <span className="font-extrabold tracking-tight text-sm text-wesText dark:text-gray-100">
+            MICHAEL CRONIN
+          </span>
+          <div className="hidden md:flex items-center gap-8 text-[11px] tracking-[0.2em] text-wesText/60 dark:text-gray-400">
+            <a href="#about"    className="hover:text-wesText dark:hover:text-gray-100 transition-colors">ABOUT</a>
+            <a href="#projects" className="hover:text-wesText dark:hover:text-gray-100 transition-colors">PROJECTS</a>
+            <a href="#photos"   className="hover:text-wesText dark:hover:text-gray-100 transition-colors">PHOTOS</a>
+            <a href="#shelf"    className="hover:text-wesText dark:hover:text-gray-100 transition-colors">BOOKSHELF</a>
+            <a href="#contact"  className="hover:text-wesText dark:hover:text-gray-100 transition-colors">CONTACT</a>
+          </div>
+        </nav>
+      </header>
+
       {/* <div className="flex justify-center space-x-6 border-b border-wesBrown mb-12">
         <button className={tab === "about" ? activeTabStyle : baseTabStyle} onClick={() => setTab("about")}>About</button>
         <button className={tab === "projects" ? activeTabStyle : baseTabStyle} onClick={() => setTab("projects")}>Projects</button>
@@ -68,7 +73,7 @@ export default function Home() {
         <button className={tab === "contact" ? activeTabStyle : baseTabStyle} onClick={() => setTab("contact")}>Contact</button>
       </div> */}
 
-      <section id="about">
+      <section id="about" style={{ scrollMarginTop: "56px" }}>
         <section className="pt-16 flex flex-col md:flex-row md:items-start items-center justify-between md:space-x-12 space-y-10 md:space-y-0">
           <div className="md:w-1/2 space-y-10">
             <blockquote className="border-l-4 border-orange-500 pl-4 italic text-orange-500 text-xl leading-relaxed">
@@ -112,16 +117,12 @@ export default function Home() {
                 height={600}
                 className="rounded-xl shadow-xl object-cover w-full"
               />
-              <div className="mt-2 text-sm text-gray-600 dark:text-gray-400 italic">
-  Captured by Yasmin{" "}
-  <button
-    onClick={() => setShowPasswordModal(true)}
-    className="relative inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-pink-500/20 transition-all duration-300 opacity-80 hover:opacity-100 animate-pulse1"
-    title="Secret"
-  >
-    <span className="text-orange-500 text-lg">❤</span>
-  </button>
-</div>
+              <div className="mt-2 text-sm text-gray-600 dark:text-gray-400 italic flex items-center gap-1">
+                Captured by Yasmin
+                <Link href="/anniversary" className="opacity-70 hover:opacity-100 transition-opacity" title="Anniversary">
+                  <span className="text-orange-500 text-lg">❤</span>
+                </Link>
+              </div>
 
             </div>
           </div>
@@ -141,7 +142,7 @@ export default function Home() {
 
       <>
         <section className="py-16">
-          <h2 className="text-4xl font-bold mb-12">Stuff I&apos;ve Done...</h2>
+          <h2 id="projects" className="text-4xl font-bold mb-12" style={{ scrollMarginTop: "70px" }}>Stuff I&apos;ve Done...</h2>
 
           <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
             {[
@@ -268,7 +269,7 @@ export default function Home() {
 
 
       <section className="px-6 sm:px-12 py-16 w-full">
-        <h2 className="text-4xl font-bold mb-12">Photos I&apos;ve Taken...</h2>
+        <h2 id="photos" className="text-4xl font-bold mb-12" style={{ scrollMarginTop: "70px" }}>Photos I&apos;ve Taken...</h2>
 
         <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
           {images.map((src, i) => (
@@ -307,13 +308,10 @@ export default function Home() {
       <div className="hidden dark:block" style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)", height: "80px", background: "linear-gradient(to bottom, #18181b, #120b04)" }} />
 
       {/* Heading — sits on the dark background */}
-      <div style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)", background: "#120b04", padding: "0 clamp(24px, 5vw, 80px) 32px" }}>
-        <h2 className="font-extrabold tracking-widest" style={{ color: "rgba(245,201,138,0.85)", fontSize: "clamp(1.5rem, 3vw, 2.25rem)", marginBottom: "6px" }}>
-          TRAVELS & TALES
+      <div id="shelf" style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)", background: "#120b04", padding: "0 clamp(24px, 5vw, 80px) 32px", scrollMarginTop: "56px" }}>
+        <h2 className="font-extrabold tracking-widest" style={{ color: "rgba(245,201,138,0.85)", fontSize: "clamp(1.5rem, 3vw, 2.25rem)" }}>
+          MY BOOKSHELF
         </h2>
-        <p style={{ color: "rgba(245,201,138,0.35)", fontSize: "13px", letterSpacing: "0.15em" }}>
-          Scroll through my journeys — click a book to explore
-        </p>
       </div>
 
       <BookCarousel />
@@ -329,7 +327,7 @@ export default function Home() {
 
 
 
-      <section className="py-12 text-center">
+      <section id="contact" className="py-12 text-center" style={{ scrollMarginTop: "70px" }}>
         <h2 className="text-2xl font-semibold mb-4">Connect with me</h2>
         <p className="text-gray-600 dark:text-gray-300 mb-6 text-lg">
           Reach out any time at <a href="mailto:michael04cronin@gmail.com" className="underline text-blue-600 dark:text-blue-400">michael04cronin@gmail.com</a>
@@ -350,134 +348,6 @@ export default function Home() {
       <p className="text-center text-xs text-gray-400 dark:text-gray-600 pb-6">
         Built with a little help from AI
       </p>
-
-     {/* Enhanced Password Modal */}
-{showPasswordModal && (
-  <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
-    <div className="relative">
-      {/* Floating particles background */}
-      <div className="absolute inset-0 overflow-hidden rounded-2xl">
-        <div className="absolute top-4 left-8 w-2 h-2 bg-pink-400 rounded-full animate-pulse opacity-60"></div>
-        <div className="absolute top-12 right-6 w-1 h-1 bg-cyan-400 rounded-full animate-pulse opacity-40" style={{ animationDelay: '0.5s' }}></div>
-        <div className="absolute bottom-8 left-4 w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse opacity-50" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-4 right-8 w-2 h-2 bg-yellow-400 rounded-full animate-pulse opacity-30" style={{ animationDelay: '1.5s' }}></div>
-      </div>
-
-      {/* Main modal */}
-      <div className="relative bg-gradient-to-br from-gray-900/95 via-zinc-800/95 to-black/95 backdrop-blur-md p-8 rounded-2xl shadow-2xl max-w-md w-full mx-4 border border-gray-700/50 animate-slideUp">
-        
-        {/* Glowing border effect */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-cyan-500/20 animate-pulse"></div>
-        <div className="absolute inset-[1px] rounded-2xl bg-gradient-to-br from-gray-900 via-zinc-800 to-black"></div>
-        
-        {/* Content */}
-        <div className="relative z-10">
-          {/* Icon */}
-          <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-            </div>
-          </div>
-
-          {/* Title */}
-          <h3 className="text-2xl font-bold mb-2 text-center bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-glow">
-            Access Required
-          </h3>
-          
-          <p className="text-gray-400 text-center mb-6 text-sm">
-            Enter the secret password to continue your journey
-          </p>
-
-          <form onSubmit={handlePasswordSubmit} className="space-y-6">
-            {/* Password input with fancy styling */}
-            <div className="relative">
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password..."
-                className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-pink-500/50 focus:bg-gray-800/70 transition-all duration-300 focus:shadow-[0_0_20px_rgba(236,72,153,0.3)] backdrop-blur-sm"
-                autoFocus
-              />
-              {/* Input glow effect */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-pink-500/10 to-purple-500/10 opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-            </div>
-
-            {/* Action buttons */}
-            <div className="flex space-x-3">
-              <button
-                type="submit"
-                className="flex-1 relative group bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(236,72,153,0.4)] focus:outline-none focus:ring-2 focus:ring-pink-500/50"
-              >
-                <span className="relative z-10 flex items-center justify-center">
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  Enter
-                </span>
-                {/* Button glow effect */}
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-pink-400 to-purple-500 opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur"></div>
-              </button>
-              
-              <button
-                type="button"
-                onClick={() => {
-                  setShowPasswordModal(false);
-                  setPassword("");
-                }}
-                className="flex-1 bg-gray-700/50 hover:bg-gray-600/50 text-gray-300 hover:text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 transform hover:scale-[1.02] border border-gray-600/30 hover:border-gray-500/50 backdrop-blur-sm"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-
-          {/* Decorative elements */}
-          <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-pink-500/30 rounded-tr-lg"></div>
-          <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-purple-500/30 rounded-bl-lg"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
-
-{/* Add these CSS animations */}
-<style jsx>{`
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slideUp {
-    from { 
-      opacity: 0; 
-      transform: translateY(20px) scale(0.95); 
-    }
-    to { 
-      opacity: 1; 
-      transform: translateY(0) scale(1); 
-    }
-  }
-  
-  @keyframes glow {
-    0%, 100% { text-shadow: 0 0 20px rgba(236, 72, 153, 0.5); }
-    50% { text-shadow: 0 0 30px rgba(236, 72, 153, 0.8), 0 0 40px rgba(147, 51, 234, 0.5); }
-  }
-  
-  .animate-fadeIn {
-    animation: fadeIn 0.3s ease-out;
-  }
-  
-  .animate-slideUp {
-    animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite;
-  }
-`}</style>
 
       <DarkModeToggle />
 
