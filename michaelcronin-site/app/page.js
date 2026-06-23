@@ -36,9 +36,6 @@ export default function Home() {
       <main className="min-h-screen bg-yellow-100 flex items-center justify-center text-center px-6">
         <div>
           <h1 className="text-4xl font-bold mb-4 text-yellow-800">🚧 Under Construction</h1>
-          <p className="text-lg text-yellow-700 max-w-xl mx-auto">
-            Hi Yasmin, I love you - Michael
-          </p>
         </div>
       </main>
     );
